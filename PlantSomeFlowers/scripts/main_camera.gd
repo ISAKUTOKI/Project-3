@@ -1,79 +1,76 @@
 extends Camera3D
 
-@export var sensitivity: int = 50  # 鼠标灵敏度
-var rotation_speed = sensitivity * 0.00005  # 鼠标速度
+@export_group("相机基础属性")
+@export var camera_sensitivity: int = 40  # 相机灵敏度
+@export var camera_fov: int = 90
+@export var camera_far: float = 10
+var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
 var can_rotate_camera: bool = false
-var viewport_size: Vector2
 
-@export var camera_shake_strength: float = 10  # 镜头晃动强度
-var can_shake_camera: bool = true
+@export_group("相机角度钳制")
+@export var camera_angle_limit_x: float = 45  # 上下角度限制(度数)
+@export var camera_angle_limit_y: float = 45  # 左右角度限制(度数)
+
+@onready var ray_cast: RayCast3D = $RayCast
+@onready var drag_and_drop: Node = $DragAndDrop
 
 
 func _ready():
-	viewport_size = get_viewport().size
-	get_viewport().connect("size_changed", Callable(self, "_on_viewport_size_changed"))
-
 	_intialize_camera()
 
 
-func _process(_delta: float) -> void:
-	_shake_camera()
-
-
 func _intialize_camera():
-	self.fov = 90
-	self.far = 10
-
-
-# 当窗口大小变化时
-func _on_viewport_size_changed():
-	viewport_size = get_viewport().size
+	self.fov = camera_fov
+	self.far = camera_far
+	ray_cast.enabled = true
 
 
 func _input(event):
-	# 切换鼠标可见性和摄像机旋转状态
-	if event.is_action_pressed("change_mouse_visiable"):
+	if event.is_action_pressed("change_camera_rotatable"):
 		can_rotate_camera = !can_rotate_camera
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if can_rotate_camera else Input.MOUSE_MODE_VISIBLE)
-
-	# 只在可以旋转摄像机时处理鼠标移动
+		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if can_rotate_camera else Input.MOUSE_MODE_VISIBLE)
 	if can_rotate_camera and event is InputEventMouseMotion:
-		# 旋转摄像机
-		rotate_y(event.relative.x * -rotation_speed)
-		rotate_object_local(Vector3(1, 0, 0), event.relative.y * -rotation_speed)
+		# 先应用旋转
+		_rotate_world_y(event)
+		_rotate_local_x(event)
+		_clamp_rotation()
+		_check_target()
 
-		# 检查鼠标是否接近窗口边缘
-		var mouse_pos = get_viewport().get_mouse_position()
-		var edge_threshold = 50  # 离边缘50像素时重置鼠标位置
-
-		# 是否需要重置鼠标位置
-		var need_warp = false
-		var new_mouse_pos = mouse_pos
-
-		# 检查各边缘
-		if mouse_pos.x <= edge_threshold:
-			new_mouse_pos.x = viewport_size.x - edge_threshold - 10
-			need_warp = true
-		elif mouse_pos.x >= viewport_size.x - edge_threshold:
-			new_mouse_pos.x = edge_threshold + 10
-			need_warp = true
-
-		if mouse_pos.y <= edge_threshold:
-			new_mouse_pos.y = viewport_size.y - edge_threshold - 10
-			need_warp = true
-		elif mouse_pos.y >= viewport_size.y - edge_threshold:
-			new_mouse_pos.y = edge_threshold + 10
-			need_warp = true
-
-		# 如果需要重置鼠标位置
-		if need_warp:
-			get_viewport().warp_mouse(new_mouse_pos)
+#region 相机的旋转逻辑
+# 沿世界y轴左右旋转
+func _rotate_world_y(event):
+	rotate_y(event.relative.x * -rotation_speed)
 
 
-func _shake_camera():
-	if can_shake_camera:
-		print("当前可以摇晃摄像头")
-	else:
-		print("不准晃")
+# 沿本地x轴上下旋转
+func _rotate_local_x(event):
+	rotate_object_local(Vector3(1, 0, 0), event.relative.y * -rotation_speed)
 
-# TODO 做个镜头自然晃动效果，当正在移动摄像头的时候不进行摇晃，当静置1秒后进行摇晃，不考虑时候可以旋转摄像头
+
+# 钳制旋转
+func _clamp_rotation():
+	var current_rotation_deg = rotation_degrees
+	# 钳制X轴旋转
+	current_rotation_deg.x = clamp(current_rotation_deg.x, -camera_angle_limit_x, camera_angle_limit_x)
+	# 钳制Y轴旋转
+	current_rotation_deg.y = clamp(current_rotation_deg.y, -camera_angle_limit_y, camera_angle_limit_y)
+	# 限制z轴保证相机稳定
+	current_rotation_deg.z = 0
+	# 应用钳制后的旋转
+	rotation_degrees = current_rotation_deg
+
+
+#endregion
+
+
+func _check_target():
+	if ray_cast.target:
+		if ray_cast.target is Card:
+			print("当前目标卡牌是", str(ray_cast.target))
+			ray_cast.target._set_mouse_is_on_self_value(true)
+		elif ray_cast.target is Flower:
+			print("当前目标花是", str(ray_cast.target))
+			pass
+
+# TODO 修正当前物体判断的逻辑
+# TODO 搭建信号管线进行逻辑处理

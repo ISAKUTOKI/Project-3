@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d264myuaqqn1e"]
+
+[ext_resource type="Script" path="res://scripts/main_camera.gd" id="1_4n7yu"]
+[ext_resource type="Script" path="res://scripts/camera_ray_cast.gd" id="2_3yjb3"]
+[ext_resource type="Script" path="res://scripts/click_card.gd" id="3_sec2l"]
+
+[node name="MainCamera" type="Camera3D"]
+script = ExtResource("1_4n7yu")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 1, 1, 1)
+debug_shape_thickness = 1
+script = ExtResource("2_3yjb3")
+
+[node name="DragAndDrop" type="Node" parent="."]
+script = ExtResource("3_sec2l")

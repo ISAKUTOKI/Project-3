@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://crwsqfckfxrt5"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_csq2x"]
+[ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="2_83ukw"]
+[ext_resource type="Texture2D" uid="uid://cv2a6bweh3sas" path="res://icon.svg" id="2_yk8gg"]
+[ext_resource type="Script" path="res://scripts/outline_highlighter.gd" id="4_m77ar"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0q1n"]
+render_priority = 0
+shader = ExtResource("2_83ukw")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/thickness = 1.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne5ma"]
+next_pass = SubResource("ShaderMaterial_t0q1n")
+albedo_texture = ExtResource("2_yk8gg")
+heightmap_enabled = true
+heightmap_scale = 16.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8w5yy"]
+material = SubResource("StandardMaterial3D_ne5ma")
+size = Vector3(0.5, 0.85, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d1w4"]
+size = Vector3(0.5, 0.85, 0.01)
+
+[node name="Card" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_csq2x")
+
+[node name="View" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("BoxMesh_8w5yy")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8d1w4")
+
+[node name="OutlineHighlighter" type="Node" parent="."]
+script = ExtResource("4_m77ar")
