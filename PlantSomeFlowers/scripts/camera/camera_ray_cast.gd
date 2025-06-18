@@ -1,4 +1,5 @@
 extends RayCast3D
+## 在此脚本只处理射线的运作逻辑，并记录当前具有collider的对象
 
 # 射线检测距离
 var ray_length = 1000.0
@@ -7,11 +8,11 @@ var ray_length = 1000.0
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		_update_ray_check()
+		_update_raycast()
 		_get_collider()
 
 
-func _update_ray_check():
+func _update_raycast():
 	# 更新射线方向（从摄像机发射到鼠标位置）
 	var mouse_pos = get_viewport().get_mouse_position()
 	var ray_origin = camera.project_ray_origin(mouse_pos)
@@ -26,11 +27,12 @@ func _get_collider():
 	#print("无碰撞")
 	if is_colliding():
 		target = get_collider()
-		#var target_point = get_collision_point()
-		#var target_normal = get_collision_normal()
 		#print("选中物体：", target.name)
-		#print("碰撞点：", target_point)
-		#print("法线方向：", target_normal)
+		if camera.has_method("_on_raycast_target_changed"):
+			camera._on_raycast_target_changed(target)
 	else:
+		if target != null:
+			if camera.has_method("_on_raycast_target_changed"):
+				camera._on_raycast_target_changed(null)
 		target = null
 		#print(str(target))

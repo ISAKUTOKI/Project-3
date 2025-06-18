@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dacqyvouwyfoi"]
+[gd_scene load_steps=11 format=3 uid="uid://dacqyvouwyfoi"]
 
 [ext_resource type="PackedScene" uid="uid://d264myuaqqn1e" path="res://scenes/main_camera.tscn" id="1_twdig"]
 [ext_resource type="PackedScene" uid="uid://crwsqfckfxrt5" path="res://scenes/card.tscn" id="2_53evp"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="3_yc1me"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_71wmt"]
 
 [sub_resource type="Animation" id="Animation_3jwau"]
 length = 0.001
@@ -79,7 +81,13 @@ shape = SubResource("ConcavePolygonShape3D_tk8uc")
 transform = Transform3D(0.8301, 0, -0.557615, 0, 1, 0, 0.557615, 0, 0.8301, 1.07954, 0.946809, -2.26708)
 
 [node name="Card2" parent="." instance=ExtResource("2_53evp")]
-transform = Transform3D(0.459967, 0, 0.887936, 0, 1, 0, -0.887936, 0, 0.459967, -1.07968, 0.958618, -2.51827)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98085, -2.9018)
 
 [node name="Card3" parent="." instance=ExtResource("2_53evp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644955, -2.9255)
+transform = Transform3D(0.892845, 0, 0.450363, 0, 1, 0, -0.450363, 0, 0.892845, -2.85668, 0.484697, -2.01101)
+
+[node name="GameController" type="Node" parent="."]
+script = ExtResource("3_yc1me")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_71wmt")

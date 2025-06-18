@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d264myuaqqn1e"]
 
-[ext_resource type="Script" path="res://scripts/main_camera.gd" id="1_4n7yu"]
-[ext_resource type="Script" path="res://scripts/camera_ray_cast.gd" id="2_3yjb3"]
-[ext_resource type="Script" path="res://scripts/click_card.gd" id="3_sec2l"]
+[ext_resource type="Script" path="res://scripts/camera/main_camera.gd" id="1_4n7yu"]
+[ext_resource type="Script" path="res://scripts/camera/camera_ray_cast.gd" id="2_3yjb3"]
+[ext_resource type="Script" path="res://scripts/camera/drag_and_drop.gd" id="3_sec2l"]
 
 [node name="MainCamera" type="Camera3D"]
 script = ExtResource("1_4n7yu")

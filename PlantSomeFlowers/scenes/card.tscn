@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://crwsqfckfxrt5"]
 
-[ext_resource type="Script" path="res://scripts/card.gd" id="1_csq2x"]
+[ext_resource type="Script" path="res://scripts/card/card.gd" id="1_csq2x"]
 [ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="2_83ukw"]
 [ext_resource type="Texture2D" uid="uid://cv2a6bweh3sas" path="res://icon.svg" id="2_yk8gg"]
-[ext_resource type="Script" path="res://scripts/outline_highlighter.gd" id="4_m77ar"]
+[ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="4_m77ar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0q1n"]
 render_priority = 0
