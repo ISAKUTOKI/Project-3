@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalSignalBus="*res://scripts/global_signal_bus.gd"
+GameController="*res://scripts/game_controller.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 

@@ -33,5 +33,3 @@ func _drop_card():
 			current_card = null
 			is_dragging = false
 #endregion
-
-# TODO 处理抓取移动的逻辑

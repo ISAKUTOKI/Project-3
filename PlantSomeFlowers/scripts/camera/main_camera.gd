@@ -3,6 +3,7 @@ extends Camera3D
 ## 并且协调子节点
 
 @export_group("相机基础属性")
+@export var camera_size: Vector2i = Vector2i(1920, 1080)
 @export var camera_sensitivity: int = 30  # 相机灵敏度
 @export var camera_fov: int = 90
 @export var camera_far: float = 10
