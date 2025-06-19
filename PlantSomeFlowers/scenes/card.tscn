@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crwsqfckfxrt5"]
+[gd_scene load_steps=11 format=3 uid="uid://crwsqfckfxrt5"]
 
 [ext_resource type="Script" path="res://scripts/card/card.gd" id="1_csq2x"]
 [ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="2_83ukw"]
@@ -24,6 +24,19 @@ size = Vector3(0.5, 0.85, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d1w4"]
 size = Vector3(0.5, 0.85, 0.01)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ex4x6"]
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 7.96
+initial_velocity_max = 7.96
+
+[sub_resource type="SphereMesh" id="SphereMesh_w7cy4"]
+radius = 0.03
+height = 0.06
+radial_segments = 8
+rings = 4
+
 [node name="Card" type="StaticBody3D"]
 collision_layer = 2
 collision_mask = 0
@@ -38,3 +51,14 @@ shape = SubResource("BoxShape3D_8d1w4")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
 script = ExtResource("4_m77ar")
+color = Color(0.858679, 0.749935, 0.655972, 1)
+thickness = 1.05
+
+[node name="UsedEffect" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ex4x6")
+draw_pass_1 = SubResource("SphereMesh_w7cy4")

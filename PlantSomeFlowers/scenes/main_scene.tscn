@@ -1,5 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://dacqyvouwyfoi"]
 
+[ext_resource type="Environment" uid="uid://cg7dfw7y7a3kv" path="res://sources/world_fog.tres" id="1_jihj1"]
 [ext_resource type="PackedScene" uid="uid://d264myuaqqn1e" path="res://scenes/main_camera.tscn" id="1_twdig"]
 [ext_resource type="PackedScene" uid="uid://crwsqfckfxrt5" path="res://scenes/card.tscn" id="2_53evp"]
 [ext_resource type="Script" path="res://scripts/game/game_controller.gd" id="3_yc1me"]
@@ -13,61 +14,16 @@
 [ext_resource type="Texture2D" uid="uid://br3hks3qcwaq6" path="res://assets/images/walls/wall_5.png" id="10_ki6dw"]
 [ext_resource type="Texture2D" uid="uid://c83f6w2tma1cb" path="res://assets/images/walls/wall_6.png" id="11_261dj"]
 [ext_resource type="Texture2D" uid="uid://d2n1adjgj64pj" path="res://assets/images/walls/wall_7.png" id="12_8rcxb"]
-
-[sub_resource type="Animation" id="Animation_3jwau"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1.38549, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_vlgc0"]
-resource_name = "new_animation"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1.38549, -0.25, 0, 0.25, 0, 4.14896, -0.25, 0, 0.25, 0, 1.38549, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1.5, 3)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ttkf7"]
-_data = {
-"RESET": SubResource("Animation_3jwau"),
-"new_animation": SubResource("Animation_vlgc0")
-}
+[ext_resource type="Texture2D" uid="uid://blj3ogahcb4px" path="res://assets/images/back_ground.png" id="14_fe0gr"]
+[ext_resource type="Texture2D" uid="uid://d3ow475r2wulo" path="res://assets/images/lamp/lamp.png" id="15_xhsrs"]
 
 [node name="Node3D" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_jihj1")
+
 [node name="MainCamera" parent="." instance=ExtResource("1_twdig")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07737, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413652, 1.38549, 0.251857)
-light_energy = 16.0
-shadow_enabled = true
-omni_range = 6.0
-omni_attenuation = 1.5
-omni_shadow_mode = 0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D"]
-libraries = {
-"": SubResource("AnimationLibrary_ttkf7")
-}
-autoplay = "new_animation"
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("3_yc1me")
@@ -82,74 +38,209 @@ script = ExtResource("4_mv6o5")
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 5.96046e-08, 0.0725156, -0.355314)
 
 [node name="Card2" parent="HoldingCard" instance=ExtResource("2_53evp")]
+visible = false
 
 [node name="Card3" parent="HoldingCard" instance=ExtResource("2_53evp")]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+visible = false
 
 [node name="Wall" type="Node" parent="."]
 script = ExtResource("6_xoy7x")
 
 [node name="Wall1" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0.949408)
 gi_mode = 2
+shaded = true
+alpha_cut = 2
 texture = ExtResource("6_6ixhy")
 
 [node name="Wall2" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 1.6)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("7_cvvbe")
 
 [node name="Wall3" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 1.1)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("8_5b4n3")
 
 [node name="Wall4" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0.6)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("9_3747k")
 
 [node name="Wall5" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0.0999999)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("10_ki6dw")
 
 [node name="Wall6" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -0.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("11_261dj")
 
 [node name="Wall7" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -0.9)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("12_8rcxb")
 
 [node name="Wall8" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -1.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("8_5b4n3")
 
 [node name="Wall9" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -1.9)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("6_6ixhy")
 
 [node name="Wall10" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -2.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("7_cvvbe")
 
 [node name="Wall11" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -2.9)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("8_5b4n3")
 
 [node name="Wall12" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -3.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("9_3747k")
 
 [node name="Wall13" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -3.9)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("10_ki6dw")
 
 [node name="Wall14" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -4.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("11_261dj")
 
 [node name="Wall15" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -4.9)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("12_8rcxb")
 
 [node name="Wall16" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -5.4)
+shaded = true
+alpha_cut = 2
 texture = ExtResource("8_5b4n3")
+
+[node name="Wall17" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -5.9)
+gi_mode = 2
+shaded = true
+alpha_cut = 2
+texture = ExtResource("6_6ixhy")
+
+[node name="Wall18" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -6.4)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("7_cvvbe")
+
+[node name="Wall19" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -6.9)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("8_5b4n3")
+
+[node name="Wall20" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -7.4)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("9_3747k")
+
+[node name="Wall21" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -7.9)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("10_ki6dw")
+
+[node name="Wall22" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -8.4)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("11_261dj")
+
+[node name="Wall23" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -8.9)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("12_8rcxb")
+
+[node name="Wall24" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -9.4)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("8_5b4n3")
+
+[node name="BackGround" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -9.9)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("14_fe0gr")
+
+[node name="Light" type="Node" parent="."]
+
+[node name="TopOmniLight" type="OmniLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0189612, 1.28153, 0.838159)
+light_color = Color(0.47, 0.4042, 0.3572, 1)
+light_energy = 9.937
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+omni_range = 6.0
+omni_attenuation = 1.5
+omni_shadow_mode = 0
+
+[node name="FlowerSpotLight" type="SpotLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 0.382683, 0.92388, 0, -0.92388, 0.382683, 0, 0.907579, -4.03284)
+light_color = Color(0.738769, 0.592755, 0.484677, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_range = 7.847
+spot_angle_attenuation = 1.8025
+
+[node name="BackGroundOmniLight1" type="OmniLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60744, -0.774659, -6.87263)
+light_color = Color(0.895661, 0.840852, 0.69395, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.0
+omni_range = 4096.0
+omni_attenuation = 2.901
+omni_shadow_mode = 0
+
+[node name="BackGroundOmniLight2" type="OmniLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46203, -0.16016, -5.83546)
+light_color = Color(0.895661, 0.840852, 0.69395, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.0
+omni_range = 4096.0
+omni_attenuation = 3.0
+omni_shadow_mode = 0
+
+[node name="Decoration" type="Node" parent="."]
+
+[node name="Lamp" type="Node" parent="Decoration"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Decoration/Lamp"]
+texture = ExtResource("15_xhsrs")

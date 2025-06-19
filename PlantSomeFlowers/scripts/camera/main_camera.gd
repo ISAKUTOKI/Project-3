@@ -6,13 +6,13 @@ extends Camera3D
 @export var camera_size: Vector2i = Vector2i(1920, 1080)
 @export var camera_sensitivity: int = 40  # 相机灵敏度
 @export var camera_fov: int = 90
-@export var camera_far: float = 10
+@export var camera_far: float = 20
 var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
 var can_rotate_camera: bool = false
 
 @export_group("相机角度钳制")
 @export var camera_angle_limit_x: float = 35  # 上下角度限制(度数)
-@export var camera_angle_limit_y: float = 45  # 左右角度限制(度数)
+@export var camera_angle_limit_y: float = 30  # 左右角度限制(度数)
 
 @onready var raycast: RayCast3D = $RayCast
 @onready var drag_and_drop: Node = $DragAndDrop
@@ -70,6 +70,8 @@ var current_target = null
 
 
 func _on_raycast_target_changed(new_target):
+	if new_target == current_target:
+		return
 	# 先清除上一个目标的描边
 	if current_target != null:
 		if current_target.has_method("mouse_exited_card"):

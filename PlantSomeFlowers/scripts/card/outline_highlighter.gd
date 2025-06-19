@@ -2,7 +2,7 @@ extends Node
 
 @onready var target: MeshInstance3D = $"../View"
 @export_color_no_alpha var color: Color = Color(1, 1, 1, 1)
-@export_range(1.0, 1.5) var thickness: float = 1.03
+@export_range(1.0, 1.5) var thickness: float = 1.07
 
 var material: ShaderMaterial
 

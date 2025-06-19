@@ -24,9 +24,8 @@ var target = null
 
 
 func _get_collider():
-	#print("无碰撞")
 	if is_colliding():
-		target = get_collider()
+		target = get_collider() # 返回第一个与射线相交的Object
 		#print("选中物体：", target.name)
 		if camera.has_method("_on_raycast_target_changed"):
 			camera._on_raycast_target_changed(target)

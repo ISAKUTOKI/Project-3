@@ -3,11 +3,12 @@ extends StaticBody3D
 @onready var view: MeshInstance3D = $View
 @onready var collider: CollisionShape3D = $Collider
 @onready var outline: Node = $OutlineHighlighter
+@onready var used_effect: GPUParticles3D = $UsedEffect
 
 var is_dragging: bool = false
 var original_pos: Vector3
 var drag_offest: Vector3
-@export var focus_offest: Vector3 = Vector3(0, 0.2, -0.07)  # x, y, z
+@export var focus_offest: Vector3 = Vector3(0, 0.3, -0.1)  # 左右, 上下, 前后
 
 var card_type: CardStats
 
@@ -15,11 +16,6 @@ var card_type: CardStats
 func _ready() -> void:
 	add_to_group("Card")
 	_initialize()
-
-
-func _process(_delta: float) -> void:
-	if is_dragging:
-		_dragging()
 
 
 func _initialize():
@@ -41,12 +37,13 @@ func hide_outline():
 #region 鼠标悬停、捡起、放下、使用
 func mouse_entered_card():
 	show_outline()
-	position += focus_offest
+	var target_pos = position + focus_offest
+	create_tween().tween_property(self, "position", target_pos, 0.1)
 
 
 func mouse_exited_card():
+	create_tween().tween_property(self, "position", original_pos, 0.1)
 	hide_outline()
-	position = original_pos
 
 
 func card_is_dragged():
@@ -65,12 +62,14 @@ func card_is_dropped():
 	pass
 
 
-func _dragging():
-	pass
-
-
 func card_is_used():
-	pass
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "rotation", rotation.z + -15, 0.1)
+	tween.tween_property(self, "scale", scale * 1.1, 0.1)
+	await tween.finished
+	
+	GlobalSignalBus.card_used.emit(self.card_type)
 #endregion
 
 # TODO 处理抓取后移动的逻辑
+# TODO 处理粒子发射的效果
