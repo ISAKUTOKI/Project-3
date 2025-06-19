@@ -15,13 +15,14 @@ func _ready() -> void:
 		var material_copy = original_material.duplicate()
 		if original_material.next_pass:
 			material_copy.next_pass = original_material.next_pass.duplicate()
-		
+
 		target.set_surface_override_material(0, material_copy)
 		material = material_copy.next_pass
 	_initialize()
 
+
 func _initialize():
-	if not material:
+	if material == null:
 		return
 	material.set_shader_parameter("color", color)
 	material.set_shader_parameter("thickness", thickness)

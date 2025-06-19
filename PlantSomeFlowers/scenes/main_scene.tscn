@@ -1,9 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://dacqyvouwyfoi"]
+[gd_scene load_steps=17 format=3 uid="uid://dacqyvouwyfoi"]
 
 [ext_resource type="PackedScene" uid="uid://d264myuaqqn1e" path="res://scenes/main_camera.tscn" id="1_twdig"]
 [ext_resource type="PackedScene" uid="uid://crwsqfckfxrt5" path="res://scenes/card.tscn" id="2_53evp"]
-[ext_resource type="Script" path="res://scripts/game_controller.gd" id="3_yc1me"]
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_71wmt"]
+[ext_resource type="Script" path="res://scripts/game/game_controller.gd" id="3_yc1me"]
+[ext_resource type="Script" path="res://scripts/game/game_manager.gd" id="4_71wmt"]
+[ext_resource type="Script" path="res://scripts/game/holding_card.gd" id="4_mv6o5"]
+[ext_resource type="Texture2D" uid="uid://bngovdjp51bfv" path="res://assets/images/walls/wall_1.png" id="6_6ixhy"]
+[ext_resource type="Script" path="res://scripts/game/wall.gd" id="6_xoy7x"]
+[ext_resource type="Texture2D" uid="uid://bd161021yu3bn" path="res://assets/images/walls/wall_2.png" id="7_cvvbe"]
+[ext_resource type="Texture2D" uid="uid://dgmiwicwk2si5" path="res://assets/images/walls/wall_3.png" id="8_5b4n3"]
+[ext_resource type="Texture2D" uid="uid://bk0xvfsx2hl32" path="res://assets/images/walls/wall_4.png" id="9_3747k"]
+[ext_resource type="Texture2D" uid="uid://br3hks3qcwaq6" path="res://assets/images/walls/wall_5.png" id="10_ki6dw"]
+[ext_resource type="Texture2D" uid="uid://c83f6w2tma1cb" path="res://assets/images/walls/wall_6.png" id="11_261dj"]
+[ext_resource type="Texture2D" uid="uid://d2n1adjgj64pj" path="res://assets/images/walls/wall_7.png" id="12_8rcxb"]
 
 [sub_resource type="Animation" id="Animation_3jwau"]
 length = 0.001
@@ -41,22 +50,15 @@ _data = {
 "new_animation": SubResource("Animation_vlgc0")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tn45m"]
-albedo_color = Color(0.189328, 0.189328, 0.189328, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_x1680"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tk8uc"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="MainCamera" parent="." instance=ExtResource("1_twdig")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832398, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07737, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413652, 1.38549, 0.251857)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 6.0
 omni_attenuation = 1.5
 omni_shadow_mode = 0
@@ -67,27 +69,87 @@ libraries = {
 }
 autoplay = "new_animation"
 
-[node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(28.7412, 0, 0, 0, 1, 0, 0, 0, 28.7412, 0, -0.848543, 0)
-material_override = SubResource("StandardMaterial3D_tn45m")
-mesh = SubResource("BoxMesh_x1680")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_tk8uc")
-
-[node name="Card" parent="." instance=ExtResource("2_53evp")]
-transform = Transform3D(0.8301, 0, -0.557615, 0, 1, 0, 0.557615, 0, 0.8301, 1.07954, 0.946809, -2.26708)
-
-[node name="Card2" parent="." instance=ExtResource("2_53evp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98085, -2.9018)
-
-[node name="Card3" parent="." instance=ExtResource("2_53evp")]
-transform = Transform3D(0.892845, 0, 0.450363, 0, 1, 0, -0.450363, 0, 0.892845, -2.85668, 0.484697, -2.01101)
-
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("3_yc1me")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_71wmt")
+
+[node name="HoldingCard" type="Node" parent="."]
+script = ExtResource("4_mv6o5")
+
+[node name="Card" parent="HoldingCard" instance=ExtResource("2_53evp")]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 5.96046e-08, 0.0725156, -0.355314)
+
+[node name="Card2" parent="HoldingCard" instance=ExtResource("2_53evp")]
+
+[node name="Card3" parent="HoldingCard" instance=ExtResource("2_53evp")]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+
+[node name="Wall" type="Node" parent="."]
+script = ExtResource("6_xoy7x")
+
+[node name="Wall1" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+gi_mode = 2
+texture = ExtResource("6_6ixhy")
+
+[node name="Wall2" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("7_cvvbe")
+
+[node name="Wall3" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("8_5b4n3")
+
+[node name="Wall4" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("9_3747k")
+
+[node name="Wall5" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("10_ki6dw")
+
+[node name="Wall6" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("11_261dj")
+
+[node name="Wall7" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("12_8rcxb")
+
+[node name="Wall8" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("8_5b4n3")
+
+[node name="Wall9" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("6_6ixhy")
+
+[node name="Wall10" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("7_cvvbe")
+
+[node name="Wall11" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("8_5b4n3")
+
+[node name="Wall12" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("9_3747k")
+
+[node name="Wall13" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("10_ki6dw")
+
+[node name="Wall14" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("11_261dj")
+
+[node name="Wall15" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("12_8rcxb")
+
+[node name="Wall16" type="Sprite3D" parent="Wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("8_5b4n3")

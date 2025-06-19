@@ -4,14 +4,14 @@ extends Camera3D
 
 @export_group("相机基础属性")
 @export var camera_size: Vector2i = Vector2i(1920, 1080)
-@export var camera_sensitivity: int = 30  # 相机灵敏度
+@export var camera_sensitivity: int = 40  # 相机灵敏度
 @export var camera_fov: int = 90
 @export var camera_far: float = 10
 var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
 var can_rotate_camera: bool = false
 
 @export_group("相机角度钳制")
-@export var camera_angle_limit_x: float = 45  # 上下角度限制(度数)
+@export var camera_angle_limit_x: float = 35  # 上下角度限制(度数)
 @export var camera_angle_limit_y: float = 45  # 左右角度限制(度数)
 
 @onready var raycast: RayCast3D = $RayCast
@@ -72,12 +72,12 @@ var current_target = null
 func _on_raycast_target_changed(new_target):
 	# 先清除上一个目标的描边
 	if current_target != null:
-		if current_target.has_method("hide_outline"):
-			current_target.hide_outline()
+		if current_target.has_method("mouse_exited_card"):
+			current_target.mouse_exited_card()
 	# 设置新目标
 	current_target = new_target
 	# 对新目标显示描边
 	if current_target != null:
-		if current_target.has_method("show_outline"):
-			current_target.show_outline()
+		if current_target.has_method("mouse_entered_card"):
+			current_target.mouse_entered_card()
 #endregion
