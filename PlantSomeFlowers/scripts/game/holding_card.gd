@@ -6,10 +6,12 @@ func _test():
 	for i in holding_card:
 		i.original_pos = i.position
 		i.original_rot = i.rotation
-	print(holding_card)
+		hloding_card_name.push_back(i.name)
+	print(hloding_card_name)
 
 
 var holding_card := []
+var hloding_card_name := []
 
 @export var offset: Vector3 = Vector3(0.4, 0, 0.8)  # x, y, z
 @export var initial_pos: Vector3 = Vector3(0, 0.07, -0.35)  # x, y, z
@@ -37,5 +39,3 @@ func draw_card(card):
 
 func use_card(used_card):
 	GameManager.current_holding_card.erase(used_card)
-
-# TODO 处理排序的逻辑

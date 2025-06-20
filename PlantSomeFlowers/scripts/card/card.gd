@@ -48,7 +48,7 @@ func mouse_exited_card():
 
 
 func card_is_dragged():
-	print(str(self.name), "被捡起了")
+	#print(str(self.name), "被捡起了")
 	hide_outline()
 	collider.disabled = true
 	is_dragging = true
@@ -56,7 +56,7 @@ func card_is_dragged():
 
 
 func card_is_dropped():
-	print(str(self.name), "被放下了")
+	#print(str(self.name), "被放下了")
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(self, "position", original_pos, 0.1)
 	tween.tween_property(self, "rotation", original_rot, 0.1)
@@ -75,5 +75,4 @@ func card_is_used():
 	GlobalSignalBus.card_used.emit(self.card_type)
 #endregion
 
-# TODO 处理抓取后移动的逻辑
 # TODO 处理粒子发射的效果

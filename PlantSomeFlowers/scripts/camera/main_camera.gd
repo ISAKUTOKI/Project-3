@@ -26,6 +26,7 @@ func _intialize_camera():
 	self.fov = camera_fov
 	self.far = camera_far
 	raycast.enabled = true
+	add_to_group("Camera")
 
 
 func _input(event):
