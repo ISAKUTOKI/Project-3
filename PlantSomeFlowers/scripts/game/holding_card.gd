@@ -5,6 +5,7 @@ func _test():
 	holding_card = get_children()
 	for i in holding_card:
 		i.original_pos = i.position
+		i.original_rot = i.rotation
 	print(holding_card)
 
 

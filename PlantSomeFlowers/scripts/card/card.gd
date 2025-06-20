@@ -7,6 +7,7 @@ extends StaticBody3D
 
 var is_dragging: bool = false
 var original_pos: Vector3
+var original_rot: Vector3
 var drag_offest: Vector3
 @export var focus_offest: Vector3 = Vector3(0, 0.3, -0.1)  # 左右, 上下, 前后
 
@@ -56,7 +57,10 @@ func card_is_dragged():
 
 func card_is_dropped():
 	print(str(self.name), "被放下了")
-	position = original_pos
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "position", original_pos, 0.1)
+	tween.tween_property(self, "rotation", original_rot, 0.1)
+	await tween.finished
 	collider.disabled = false
 	is_dragging = false
 	pass
@@ -67,7 +71,7 @@ func card_is_used():
 	tween.tween_property(self, "rotation", rotation.z + -15, 0.1)
 	tween.tween_property(self, "scale", scale * 1.1, 0.1)
 	await tween.finished
-	
+
 	GlobalSignalBus.card_used.emit(self.card_type)
 #endregion
 
