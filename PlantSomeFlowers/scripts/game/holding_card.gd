@@ -39,3 +39,5 @@ func draw_card(card):
 
 func use_card(used_card):
 	GameManager.current_holding_card.erase(used_card)
+
+# TODO 处理排序手牌的逻辑
