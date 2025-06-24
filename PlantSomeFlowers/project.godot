@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 GlobalSignalBus="*res://scripts/game/global_signal_bus.gd"
 GameController="*res://scripts/game/game_controller.gd"
 GameManager="*res://scripts/game/game_manager.gd"
+CardStats="*res://scripts/card/card_stats.gd"
+FlowerStats="*res://scripts/flower/flower_stats.gd"
 
 [display]
 
@@ -72,6 +74,8 @@ test_function_4={
 
 3d_render/layer_1="ground"
 3d_render/layer_2="card"
+3d_physics/layer_1="默认层"
+3d_physics/layer_2="可操作层"
 
 [rendering]
 

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://djcoiwc3uaj7k"]
+
+[ext_resource type="Script" path="res://scripts/flower/flower.gd" id="1_un1qg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45ksm"]
+albedo_color = Color(0.41, 0.308935, 0.2009, 1)
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dxd37"]
+material = SubResource("StandardMaterial3D_45ksm")
+top_radius = 0.6
+height = 1.2
+radial_segments = 8
+rings = 1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hgcuu"]
+points = PackedVector3Array(0.6, 0.6, 0, 0.424158, 0.6, -0.424276, 0.424158, 0.6, 0.424158, 0.353446, -0.6, 0.353446, 0.499922, -0.6, 0, 0.353446, -0.6, -0.353563, 0, 0, -0.550078, 0, 0.6, -0.6, 0, 0.6, 0.6, 0, -0.6, 0.499922, 0, -0.6, -0.500039, -0.353563, -0.6, -0.353563, -0.424276, 0.6, -0.424276, -0.424276, 0.6, 0.424158, -0.353563, -0.6, 0.353446, -0.500039, -0.6, 0, -0.550078, 0, 0, -0.6, 0.6, 0)
+
+[node name="Flower" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_un1qg")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_dxd37")
+
+[node name="collider" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_hgcuu")

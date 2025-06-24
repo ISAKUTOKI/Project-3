@@ -33,24 +33,22 @@ func _update_drag_position():
 	var mouse_pos = get_viewport().get_mouse_position()
 	var ray_dir = camera.project_ray_normal(mouse_pos)
 	current_card.global_position = camera.global_position + ray_dir * drag_distance
-	
+	#print(current_card.global_position)
 	# 获取相机y轴旋转旋转（只取Y轴）
 	var camera_rotation = camera.global_transform.basis.get_euler()
 	
 	# 应用旋转（保持卡片自身X/Z轴旋转，仅同步Y轴旋转）
 	current_card.rotation = Vector3(
-		current_card.rotation.x,  # 保持原有X轴旋转（如需要倾斜效果）
-		camera_rotation.y,        # 同步相机Y轴旋转
-		current_card.rotation.z   # 保持原有Z轴旋转
+		current_card.rotation.x,  # X轴旋转不变
+		camera_rotation.y,        # 控制y轴面向相机
+		current_card.rotation.z   # Z轴旋转不变
 	)
-
 
 
 func _drop_card():
 	if is_dragging and (Input.is_action_just_released("drag") or Input.is_action_just_pressed("drop")):
 		if camera.current_target is Flower:  # 假设Flower是花的类型
 			current_card.card_is_used()
-			GlobalSignalBus.card_used.emit(current_card)
 		else:
 			current_card.card_is_dropped()
 

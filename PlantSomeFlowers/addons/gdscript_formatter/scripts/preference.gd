@@ -29,14 +29,14 @@ var _version := "v0.2.0"
 
 ## How many characters per line to allow.
 ## 每行允许的最大字符数量。
-@export var line_length := 175:
+@export var line_length := 100:
 	set(v):
 		line_length = v
 		emit_changed()
 
 ## If true, will format on save.
 ## 如果开启，将在脚本保存时进行格式化。
-@export var format_on_save := false:
+@export var format_on_save := true:
 	set(v):
 		format_on_save = v
 		emit_changed()
@@ -56,7 +56,7 @@ var _version := "v0.2.0"
 
 ## If true, will skip safety checks.
 ## 如果开启，则跳过安全检查。
-@export var fast_but_unsafe := false:
+@export var fast_but_unsafe := true:
 	set(v):
 		fast_but_unsafe = v
 		emit_changed()

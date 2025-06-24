@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node
 
 var wall_list := []
@@ -9,10 +9,8 @@ var wall_list := []
 
 func _ready() -> void:
 	_get_wall_list()
-	if Engine.is_editor_hint():
-		_initialize()
-		_rank_wall()
-		return
+	_rank_wall()
+	_initialize()
 	GlobalSignalBus.start_shake.connect(_on_start_shake)
 	GlobalSignalBus.stop_shake.connect(_on_stop_shake)
 

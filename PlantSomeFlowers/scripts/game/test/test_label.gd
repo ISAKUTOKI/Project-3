@@ -21,8 +21,15 @@ func _process(_delta: float) -> void:
 		return
 	card_pos = camera.current_target.position
 	card_rot = camera.current_target.rotation
-	self.text = camera.current_target.name + " 位置： " + str(card_pos)
-	self.text += camera.current_target.name + " 旋转： " + str(card_rot)
+
+	if camera.current_target is Card:
+		self.text = CardStats.CARD_NAME[camera.current_target.card_type]
+	elif camera.current_target is Flower:
+		self.text = FlowerStats.FLOWER_NAME[camera.current_target.flower_type]
+	self.text += "        "  # 8
+	self.text += "位置：" + str(card_pos)
+	self.text += "        "  # 8
+	self.text += "旋转：" + str(card_rot)
 
 
 var has_warned: bool = false

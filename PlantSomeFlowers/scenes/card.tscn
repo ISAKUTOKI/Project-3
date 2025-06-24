@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://crwsqfckfxrt5"]
+[gd_scene load_steps=13 format=3 uid="uid://crwsqfckfxrt5"]
 
 [ext_resource type="Script" path="res://scripts/card/card.gd" id="1_csq2x"]
 [ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="2_83ukw"]
 [ext_resource type="Texture2D" uid="uid://cv2a6bweh3sas" path="res://icon.svg" id="2_yk8gg"]
 [ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="4_m77ar"]
+[ext_resource type="Material" uid="uid://l5ukh1bxw7bd" path="res://sources/card_used_particles.tres" id="5_wvuv8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0q1n"]
 render_priority = 0
@@ -23,14 +24,62 @@ size = Vector3(0.5, 0.85, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d1w4"]
 size = Vector3(0.5, 0.85, 0.01)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ex4x6"]
-inherit_velocity_ratio = 1.0
-direction = Vector3(1, 1, 0)
-spread = 180.0
-initial_velocity_min = 7.96
-initial_velocity_max = 7.96
+[sub_resource type="Shader" id="Shader_l3ogi"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_disabled, unshaded, shadows_disabled, ambient_light_disabled, fog_disabled;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+//uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+//uniform vec3 uv2_scale;
+//uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dknt"]
+render_priority = 0
+shader = SubResource("Shader_l3ogi")
+shader_parameter/albedo = Color(0.939255, 0.887924, 0.770914, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
 
 [sub_resource type="SphereMesh" id="SphereMesh_w7cy4"]
+material = SubResource("ShaderMaterial_1dknt")
 radius = 0.03
 height = 0.06
 radial_segments = 8
@@ -56,8 +105,8 @@ thickness = 1.05
 [node name="UsedEffect" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 20
-lifetime = 0.2
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_ex4x6")
+process_material = ExtResource("5_wvuv8")
 draw_pass_1 = SubResource("SphereMesh_w7cy4")
