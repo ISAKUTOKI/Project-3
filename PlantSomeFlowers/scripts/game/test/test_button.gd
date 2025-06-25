@@ -10,6 +10,10 @@ extends Button
 
 @onready var main_camera: Camera3D = $"../../MainCamera"
 
+@export var use_button_1: bool = true
+@export var use_button_2: bool = true
+@export var use_button_3: bool = true
+
 
 func _ready() -> void:
 	text = str(GameManager.SHAKE_NAME[shake_strength])
@@ -17,6 +21,16 @@ func _ready() -> void:
 		button_2.text = "停止震动"
 	if button_3:
 		button_3.text = "使用默认卡牌"
+
+	if not use_button_1:
+		button_1.disabled = true
+		button_1.visible = false
+	if not use_button_2:
+		button_2.disabled = true
+		button_2.visible = false
+	if not use_button_3:
+		button_3.disabled = true
+		button_3.visible = false
 
 
 func _on_button_1pressed() -> void:

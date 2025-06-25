@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://oph00urdj3sd" path="res://assets/images/lamp/light_2.png" id="19_8ckt6"]
 [ext_resource type="Texture2D" uid="uid://cavv68tb5cl46" path="res://assets/images/lamp/light_3.png" id="20_2o4wj"]
 [ext_resource type="Texture2D" uid="uid://dvcrsiymsbqpv" path="res://assets/images/lamp/light_4.png" id="21_jdf11"]
+[ext_resource type="Animation" uid="uid://33wsij4wgbix" path="res://animations/lamp_light.res" id="23_hpp3k"]
+[ext_resource type="Animation" uid="uid://5d7qkvl1isfd" path="res://animations/lamp_shake.res" id="24_vsacy"]
 
 [sub_resource type="Animation" id="Animation_d3r5n"]
 length = 0.001
@@ -77,70 +79,48 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0.0989078)]
 }
-
-[sub_resource type="Animation" id="Animation_iub05"]
-resource_name = "lamp_light_1"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LampLight1:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.733333, 1, 1.63333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LampHolder:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.038004), Vector3(0, 0, -0.238464), Vector3(0, 0, -0.141298)]
+"values": [Vector3(0, 1.8564, -0.0597706)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LampLight2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.333333, 0.566667, 1, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LampHolder/LampRope:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.0523546), Vector3(0, 0, 0.0989078), Vector3(0, 0, 0.135755)]
+"values": [Vector3(0, 0, 0.436332)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LampLight3:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.166667, 0.5, 1, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LampHolder/LampRope/Lamp:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0201795), Vector3(0, 0, -0.0757298), Vector3(0, 0, -0.0672283)]
+"values": [Vector3(0, 0, 0.436332)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LampLight4:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.0333333, 0.4, 1.3, 1.46667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.010465), Vector3(0, 0, 0.196681), Vector3(0, 0, 0.129049)]
-}
-
-[sub_resource type="Animation" id="Animation_6ekay"]
-resource_name = "lamp_wobble"
-length = 2.0
-loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4xy5"]
 _data = {
 "RESET": SubResource("Animation_d3r5n"),
-"lamp_light": SubResource("Animation_iub05"),
-"lamp_wobble": SubResource("Animation_6ekay")
+"lamp_light": ExtResource("23_hpp3k"),
+"lamp_shake": ExtResource("24_vsacy")
 }
 
 [sub_resource type="BoxMesh" id="BoxMesh_n88va"]
@@ -387,17 +367,17 @@ script = ExtResource("14_igfoy")
 metadata/_edit_lock_ = true
 
 [node name="LampHolder" type="Sprite3D" parent="Decoration/TopLamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94, -0.0597706)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8564, -0.0597706)
 offset = Vector2(13.2, -201.735)
 texture = ExtResource("16_0154a")
 
-[node name="LampRope" type="Sprite3D" parent="Decoration/TopLamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.453, 0)
+[node name="LampRope" type="Sprite3D" parent="Decoration/TopLamp/LampHolder"]
+transform = Transform3D(0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 0, -0.487, 0.0597706)
 offset = Vector2(13.34, -156.27)
 texture = ExtResource("15_ebahb")
 
-[node name="Lamp" type="Sprite3D" parent="Decoration/TopLamp/LampRope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.842, 0.06)
+[node name="Lamp" type="Sprite3D" parent="Decoration/TopLamp/LampHolder/LampRope"]
+transform = Transform3D(0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 0, -0.842, 0.0599999)
 offset = Vector2(12.9, -72.15)
 texture = ExtResource("15_xhsrs")
 
@@ -425,8 +405,6 @@ texture = ExtResource("21_jdf11")
 libraries = {
 "": SubResource("AnimationLibrary_v4xy5")
 }
-autoplay = "lamp_light"
-speed_scale = 0.2
 
 [node name="Table" type="Node3D" parent="Decoration"]
 
@@ -450,8 +428,11 @@ offset_left = 10.0
 offset_top = 32.0
 offset_right = 83.0
 offset_bottom = 61.0
+keep_pressed_outside = true
 text = "test"
 script = ExtResource("18_u5rgq")
+shake_strength = 2
+use_button_3 = false
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0

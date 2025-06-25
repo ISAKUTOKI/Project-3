@@ -19,17 +19,16 @@ func _process(_delta: float) -> void:
 	if camera.current_target == null:
 		text = "--当前没有目标--"
 		return
-	card_pos = camera.current_target.position
-	card_rot = camera.current_target.rotation
-
+	else:
+		text = "--当前目标为： "
 	if camera.current_target is Card:
-		self.text = CardStats.CARD_NAME[camera.current_target.card_type]
+		self.text += CardStats.CARD_NAME[camera.current_target.card_type]
 	elif camera.current_target is Flower:
-		self.text = FlowerStats.FLOWER_NAME[camera.current_target.flower_type]
+		self.text += FlowerStats.FLOWER_NAME[camera.current_target.flower_type]
+	self.text += "--        "  # 8
+	self.text += "位置：" + str(camera.current_target.position)
 	self.text += "        "  # 8
-	self.text += "位置：" + str(card_pos)
-	self.text += "        "  # 8
-	self.text += "旋转：" + str(card_rot)
+	self.text += "旋转：" + str(camera.current_target.rotation)
 
 
 var has_warned: bool = false

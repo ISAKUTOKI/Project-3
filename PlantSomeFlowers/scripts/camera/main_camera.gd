@@ -61,13 +61,9 @@ func _rotate_local_x(event):
 func _clamp_rotation():
 	var current_rotation_deg = rotation_degrees
 	# 钳制X轴旋转
-	current_rotation_deg.x = clamp(
-		current_rotation_deg.x, -camera_angle_limit_x, camera_angle_limit_x
-	)
+	current_rotation_deg.x = clamp(current_rotation_deg.x, -camera_angle_limit_x, camera_angle_limit_x)
 	# 钳制Y轴旋转
-	current_rotation_deg.y = clamp(
-		current_rotation_deg.y, -camera_angle_limit_y, camera_angle_limit_y
-	)
+	current_rotation_deg.y = clamp(current_rotation_deg.y, -camera_angle_limit_y, camera_angle_limit_y)
 	# 限制z轴保证相机稳定
 	current_rotation_deg.z = 0
 	# 应用钳制后的旋转

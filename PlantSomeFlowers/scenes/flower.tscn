@@ -11,6 +11,7 @@ shading_mode = 2
 disable_ambient_light = true
 albedo_color = Color(0.41, 0.308935, 0.2009, 1)
 roughness = 0.0
+texture_filter = 0
 grow_amount = -0.115
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxd37"]
