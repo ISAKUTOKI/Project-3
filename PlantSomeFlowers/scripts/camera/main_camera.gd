@@ -5,7 +5,7 @@ extends Camera3D
 @export_group("相机基础属性")
 @export var camera_size: Vector2i = Vector2i(1920, 1080)
 @export var camera_sensitivity: int = 40  # 相机灵敏度
-@export var camera_fov: int = 90
+@export var camera_fov: int = 95
 @export var camera_far: float = 20
 var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
 var can_rotate_camera: bool = false
@@ -24,11 +24,9 @@ func _ready():
 	GlobalSignalBus.stop_shake.connect(_on_stop_shake)
 
 
-func _intialize_camera():
-	self.fov = camera_fov
-	self.far = camera_far
-	raycast.enabled = true
-	add_to_group("Camera")
+func _process(delta: float) -> void:
+	if is_shaking:
+		_shake(delta)
 
 
 func _input(event):
@@ -40,14 +38,23 @@ func _input(event):
 		_clamp_rotation()
 
 
+func _intialize_camera():
+	self.fov = camera_fov
+	self.far = camera_far
+	raycast.enabled = true
+	add_to_group("Camera")
+
+
 #region 相机的旋转逻辑
 # 沿世界y轴左右旋转
 func _rotate_world_y(event):
 	rotate_y(event.relative.x * -rotation_speed)
 
+
 # 沿本地x轴上下旋转
 func _rotate_local_x(event):
 	rotate_object_local(Vector3(1, 0, 0), event.relative.y * -rotation_speed)
+
 
 # 钳制旋转
 func _clamp_rotation():
@@ -85,15 +92,54 @@ func _on_raycast_target_changed(new_target):
 
 #endregion
 
+#region 震动相关逻辑
+var is_shaking: bool = false
+var shake_phase: float
+var fov_plus_value: float
+var pos_coefficient: float
+var original_pos: Vector3
 
-func _on_start_shake(_shake_strength: float):
-	can_rotate_camera = false
 
-	pass
+func _on_start_shake(_shake_strength: GameManager.ShakeType):
+	print("开始震动： ", self.name)
+	# 处理逻辑
+	set_process_input(false)
+	is_shaking = true
+	original_pos = self.position
+	# 视角
+	match _shake_strength:
+		GameManager.ShakeType.小震:
+			fov_plus_value = 7
+			pos_coefficient = 0.1
+		GameManager.ShakeType.中震:
+			fov_plus_value = 14
+			pos_coefficient = 2
+		GameManager.ShakeType.强震:
+			fov_plus_value = 21
+			pos_coefficient = 4
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "rotation_degrees", Vector3(-5, 0, 0), 0.1)
+	tween.tween_property(self, "fov", camera_fov + fov_plus_value, 0.1)
+
+
+func _shake(delta: float):
+	shake_phase += delta
+	#print(shake_phase)
+	var target_pos: Vector3
+	target_pos = Vector3(sin(shake_phase) * pos_coefficient * 5, cos(shake_phase) * pos_coefficient * 5, tanh(shake_phase) * pos_coefficient) * 5
+	self.position = target_pos
 
 
 func _on_stop_shake():
-	can_rotate_camera = true
-	pass
+	print("停止震动： ", self.name)
+	# 处理逻辑
+	set_process_input(true)
+	is_shaking = false
+	# 视角
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "fov", camera_fov, 0.1)
+	tween.tween_property(self, "position", original_pos, 0.1)
+	# 其他数据处理
+#endregion
 
 # TODO 完成相机的震动效果

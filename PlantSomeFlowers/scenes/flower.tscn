@@ -36,3 +36,4 @@ shape = SubResource("ConvexPolygonShape3D_hgcuu")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
 script = ExtResource("2_7fdmg")
+color = Color(0.950443, 0.939205, 0.879115, 1)

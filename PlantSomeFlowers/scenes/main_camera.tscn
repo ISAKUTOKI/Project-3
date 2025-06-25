@@ -6,7 +6,6 @@
 
 [node name="MainCamera" type="Camera3D"]
 script = ExtResource("1_4n7yu")
-camera_fov = 95
 
 [node name="RayCast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)
