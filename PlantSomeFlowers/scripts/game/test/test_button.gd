@@ -20,11 +20,10 @@ func _ready() -> void:
 
 
 func _on_button_1pressed() -> void:
-	#print("按下了： " + self.name)
 	if not use_this_test:
 		push_warning("未启用此测试功能： " + self.name)
 		return
-	GameController.shake(shake_strength)
+	GameController.start_a_shake(shake_strength, 2.0)
 
 
 func _on_button_2_pressed() -> void:

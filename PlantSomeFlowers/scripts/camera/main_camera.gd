@@ -20,6 +20,8 @@ var can_rotate_camera: bool = false
 
 func _ready():
 	_intialize_camera()
+	GlobalSignalBus.start_shake.connect(_on_start_shake)
+	GlobalSignalBus.stop_shake.connect(_on_stop_shake)
 
 
 func _intialize_camera():
@@ -32,9 +34,7 @@ func _intialize_camera():
 func _input(event):
 	if event.is_action_pressed("change_camera_rotatable"):
 		can_rotate_camera = !can_rotate_camera
-		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if can_rotate_camera else Input.MOUSE_MODE_VISIBLE)
 	if can_rotate_camera and event is InputEventMouseMotion:
-		# 先应用旋转
 		_rotate_world_y(event)
 		_rotate_local_x(event)
 		_clamp_rotation()
@@ -45,11 +45,9 @@ func _input(event):
 func _rotate_world_y(event):
 	rotate_y(event.relative.x * -rotation_speed)
 
-
 # 沿本地x轴上下旋转
 func _rotate_local_x(event):
 	rotate_object_local(Vector3(1, 0, 0), event.relative.y * -rotation_speed)
-
 
 # 钳制旋转
 func _clamp_rotation():
@@ -83,4 +81,19 @@ func _on_raycast_target_changed(new_target):
 	if current_target != null:
 		if current_target.has_method("mouse_entered_card"):
 			current_target.mouse_entered_card()
+
+
 #endregion
+
+
+func _on_start_shake(_shake_strength: float):
+	can_rotate_camera = false
+
+	pass
+
+
+func _on_stop_shake():
+	can_rotate_camera = true
+	pass
+
+# TODO 完成相机的震动效果

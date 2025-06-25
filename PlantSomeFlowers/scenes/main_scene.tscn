@@ -161,15 +161,8 @@ script = ExtResource("4_mv6o5")
 [node name="Card" parent="HoldingCard" instance=ExtResource("2_53evp")]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 5.96046e-08, 0.0725156, -0.355314)
 
-[node name="Card2" parent="HoldingCard" instance=ExtResource("2_53evp")]
-visible = false
-
-[node name="Card3" parent="HoldingCard" instance=ExtResource("2_53evp")]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
-visible = false
-
 [node name="Flower" parent="." instance=ExtResource("5_4wu4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.810114, -4.87548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68, -4.875)
 
 [node name="Wall" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
@@ -389,7 +382,7 @@ spot_angle_attenuation = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426336, 0)
 
 [node name="TopLamp" type="Node3D" parent="Decoration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.442, -4.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.467, -5.405)
 script = ExtResource("14_igfoy")
 metadata/_edit_lock_ = true
 

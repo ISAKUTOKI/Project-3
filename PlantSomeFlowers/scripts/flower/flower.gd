@@ -1,8 +1,9 @@
 extends StaticBody3D
 class_name Flower
 
-@onready var mesh: MeshInstance3D = $Mesh
+@onready var view: MeshInstance3D = $View
 @onready var collider: CollisionShape3D = $collider
+@onready var outline: Node = $OutlineHighlighter
 
 var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.幼苗
 
@@ -14,7 +15,31 @@ func _ready() -> void:
 
 
 func _initialize():
-	pass
+	hide_outline()
+
+
+#region 边缘线高亮
+func show_outline():
+	outline.show()
+
+
+func hide_outline():
+	outline.hide()
+
+
+#endregion
+
+
+#region 鼠标状态切换
+func mouse_entered_card():
+	show_outline()
+
+
+func mouse_exited_card():
+	hide_outline()
+
+
+#endregion
 
 
 func _on_card_used(card: CardStats.CardType):

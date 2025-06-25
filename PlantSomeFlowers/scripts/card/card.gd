@@ -59,10 +59,10 @@ func card_is_dragged():
 
 func card_is_dropped():
 	#print(str(self.name), "被放下了")
-	self.scale = original_sca
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(self, "position", original_pos, 0.1)
-	tween.tween_property(self, "rotation", original_rot, 0.1)
+	tween.tween_property(self, "rotation_degrees", original_rot, 0.1)
+	tween.tween_property(self, "scale", original_sca, 0.1)
 	await tween.finished
 	collider.disabled = false
 	is_dragging = false
@@ -78,7 +78,6 @@ func card_is_used():
 	await tween.finished
 
 	# 粒子特效
-	#print("粒子特效出生位置为： ", str(self.position))
 	used_effect.emitting = true
 	await get_tree().create_timer(used_effect.lifetime + 0.1).timeout
 
@@ -91,6 +90,3 @@ func card_is_used():
 	self.queue_free()
 	#card_is_dropped()
 #endregion
-
-# TODO 处理粒子发射的效果
-# TODO 完善使用后的逻辑

@@ -13,9 +13,9 @@ events = [SubResource("InputEventKey_hjtih")]
 
 [resource]
 script = ExtResource("1_4q113")
-line_length = 175
+line_length = 100
 format_on_save = false
 shortcut = SubResource("Shortcut_o1th6")
-fast_but_unsafe = false
+fast_but_unsafe = true
 gdformat_command = "gdformat"
 pip_command = "pip"

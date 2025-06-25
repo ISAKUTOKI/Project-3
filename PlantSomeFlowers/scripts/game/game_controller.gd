@@ -4,9 +4,11 @@ extends Node
 ## 负责管理游戏的总处理以及数据的更新
 
 
-func shake(strength: GameManager.ShakeType):
-	print("进行了一次震动，震幅为： " + GameManager.SHAKE_NAME[strength])
+func start_a_shake(strength: GameManager.ShakeType, shake_time: float = 1):
 	GlobalSignalBus.start_shake.emit(strength)
+	await get_tree().create_timer(shake_time).timeout
+	stop_shake()
+
 
 func stop_shake():
 	GlobalSignalBus.stop_shake.emit()

@@ -15,7 +15,6 @@ func _ready() -> void:
 		var material_copy = original_material.duplicate()
 		if original_material.next_pass:
 			material_copy.next_pass = original_material.next_pass.duplicate()
-
 		target.set_surface_override_material(0, material_copy)
 		material = material_copy.next_pass
 	_initialize()

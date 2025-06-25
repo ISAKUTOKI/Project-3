@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://djcoiwc3uaj7k"]
+[gd_scene load_steps=7 format=3 uid="uid://djcoiwc3uaj7k"]
 
 [ext_resource type="Script" path="res://scripts/flower/flower.gd" id="1_un1qg"]
+[ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="2_7fdmg"]
+[ext_resource type="Material" uid="uid://dctuir8xbav1n" path="res://sources/normal_based_outline.tres" id="2_ypnli"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45ksm"]
+render_priority = 1
+next_pass = ExtResource("2_ypnli")
+shading_mode = 2
+disable_ambient_light = true
 albedo_color = Color(0.41, 0.308935, 0.2009, 1)
 roughness = 0.0
+grow_amount = -0.115
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxd37"]
 material = SubResource("StandardMaterial3D_45ksm")
@@ -21,8 +28,11 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_un1qg")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
+[node name="View" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_dxd37")
 
 [node name="collider" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_hgcuu")
+
+[node name="OutlineHighlighter" type="Node" parent="."]
+script = ExtResource("2_7fdmg")

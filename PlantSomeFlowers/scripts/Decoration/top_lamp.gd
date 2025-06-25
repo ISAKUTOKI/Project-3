@@ -15,3 +15,5 @@ extends Node3D
 func _ready() -> void:
 	if animator:
 		animator.speed_scale = 0.5
+
+# TODO 完成灯的震动效果（摇晃）

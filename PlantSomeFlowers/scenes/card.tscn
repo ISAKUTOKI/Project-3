@@ -1,19 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://crwsqfckfxrt5"]
+[gd_scene load_steps=12 format=3 uid="uid://crwsqfckfxrt5"]
 
 [ext_resource type="Script" path="res://scripts/card/card.gd" id="1_csq2x"]
-[ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="2_83ukw"]
 [ext_resource type="Texture2D" uid="uid://cv2a6bweh3sas" path="res://icon.svg" id="2_yk8gg"]
+[ext_resource type="Material" uid="uid://dctuir8xbav1n" path="res://sources/normal_based_outline.tres" id="3_jhxvp"]
 [ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="4_m77ar"]
 [ext_resource type="Material" uid="uid://l5ukh1bxw7bd" path="res://sources/card_used_particles.tres" id="5_wvuv8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0q1n"]
-render_priority = 0
-shader = ExtResource("2_83ukw")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/thickness = 1.05
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne5ma"]
-next_pass = SubResource("ShaderMaterial_t0q1n")
+render_priority = 1
+next_pass = ExtResource("3_jhxvp")
 albedo_texture = ExtResource("2_yk8gg")
 heightmap_scale = 16.0
 
