@@ -13,7 +13,7 @@ events = [SubResource("InputEventKey_hjtih")]
 
 [resource]
 script = ExtResource("1_4q113")
-line_length = 100
+line_length = 105
 format_on_save = false
 shortcut = SubResource("Shortcut_o1th6")
 fast_but_unsafe = true

@@ -452,7 +452,6 @@ offset_right = 83.0
 offset_bottom = 61.0
 text = "test"
 script = ExtResource("18_u5rgq")
-shake_strength = 2
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0
