@@ -34,9 +34,6 @@ func _play_animation(clip: String, play_speed_scale: float = 1):
 	pass
 
 
-# TODO 完成灯的震动效果（摇晃）
-
-
 func _on_start_shake(shake_type: GameManager.ShakeType):
 	var shake_speed_scale: float
 	match shake_type:
