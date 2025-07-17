@@ -332,11 +332,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426336, 0)
 [node name="TopOmniLight" type="OmniLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0189612, 1.8, 0.838159)
 light_color = Color(0.47, 0.4042, 0.3572, 1)
-light_energy = 9.937
+light_energy = 3.026
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
-omni_range = 10.0
-omni_attenuation = 1.5
+omni_range = 4.229
+omni_attenuation = -0.34
 omni_shadow_mode = 0
 
 [node name="FlowerSpotLight" type="SpotLight3D" parent="Light"]
@@ -350,13 +350,14 @@ spot_angle_attenuation = 1.8025
 
 [node name="BackgroundSpotLight" type="SpotLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, 0.887944, 0.459952, 0, -0.459952, 0.887944, 0, 3.03571, -1.42033)
-light_color = Color(0.833467, 0.748306, 0.631477, 1)
-light_indirect_energy = 0.0
+light_color = Color(0.859168, 0.746985, 0.63364, 1)
+light_energy = 0.5
+light_specular = 0.0
 light_bake_mode = 0
-spot_range = 22.363
-spot_attenuation = -0.59
-spot_angle = 74.85
-spot_angle_attenuation = 0.5
+spot_range = 17.489
+spot_attenuation = -0.6
+spot_angle = 69.53
+spot_angle_attenuation = 0.615574
 
 [node name="Decoration" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426336, 0)

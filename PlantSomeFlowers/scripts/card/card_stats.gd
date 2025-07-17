@@ -15,3 +15,7 @@ const CARD_NAME:={
 	CardType.捉虫: "捉虫",
 	CardType.收获: "收获"
 }
+
+const CARD_MATERIAL:={
+	CardType.浇水: preload("res://materials/card_water.tres")
+}

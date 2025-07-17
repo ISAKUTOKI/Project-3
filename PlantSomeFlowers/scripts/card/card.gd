@@ -1,19 +1,21 @@
 extends StaticBody3D
 class_name Card
 
+@export var card_type: CardStats.CardType = CardStats.CardType.浇水
+
 @onready var view: MeshInstance3D = $View
 @onready var collider: CollisionShape3D = $Collider
 @onready var outline: Node = $OutlineHighlighter
 @onready var used_effect: GPUParticles3D = $UsedEffect
+
+var material = null
 
 var is_dragging: bool = false
 var original_pos: Vector3
 var original_rot: Vector3
 var original_sca: Vector3
 var drag_offest: Vector3
-@export var focus_offest: Vector3 = Vector3(0, 0.3, -0.1)  # 左右, 上下, 前后
-
-var card_type: CardStats.CardType = CardStats.CardType.浇水
+var focus_offest: Vector3 = Vector3(0, 0.3, -0.1)  # 鼠标悬停时的偏移
 
 
 func _ready() -> void:
@@ -22,6 +24,8 @@ func _ready() -> void:
 
 
 func _initialize():
+	material = CardStats.CARD_MATERIAL[card_type]
+	view.mesh.surface_set_material(0, material)
 	hide_outline()
 
 
