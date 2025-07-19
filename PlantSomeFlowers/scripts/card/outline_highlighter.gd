@@ -5,7 +5,7 @@ extends Node
 @export_range(1.0, 1.5) var thickness: float = 1.07
 
 var material: StandardMaterial3D
-var material_next_pass
+var material_next_pass: ShaderMaterial
 
 
 func initialize_node() -> void:
@@ -19,8 +19,10 @@ func initialize_node() -> void:
 	target.set_surface_override_material(0, _material_copy)
 	# 设置变量
 	material = target.get_surface_override_material(0)
-	# TODO 着为什么会是空值呢？为什么呢？？？？？？？？
+	print(material)
+	# TODO 为什么会是空值呢？为什么呢？？？？？？？？
 	material_next_pass = material.next_pass
+	print(material_next_pass)
 	# 初始化
 	_initialize()
 
@@ -39,6 +41,6 @@ func show():
 
 func hide():
 	material_next_pass.set_shader_parameter("color", Color(color.r, color.g, color.b, 0))
-	print("隐藏了边缘线，来自于： ", get_parent().name)
+	#print("隐藏了边缘线，来自于： ", get_parent().name)
 
 # TODO 修好这个该死的材质系统

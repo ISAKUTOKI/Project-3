@@ -142,7 +142,7 @@ script = ExtResource("4_mv6o5")
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 5.96046e-08, 0.0725156, -0.355314)
 
 [node name="Flower" parent="." instance=ExtResource("5_4wu4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68, -4.875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34665, -4.70509)
 
 [node name="Wall" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
@@ -346,12 +346,13 @@ light_energy = 16.0
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 spot_range = 13.952
+spot_attenuation = -0.18
 spot_angle_attenuation = 1.8025
 
 [node name="BackgroundSpotLight" type="SpotLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, 0.887944, 0.459952, 0, -0.459952, 0.887944, 0, 3.03571, -1.42033)
 light_color = Color(0.859168, 0.746985, 0.63364, 1)
-light_energy = 0.5
+light_energy = 0.736
 light_specular = 0.0
 light_bake_mode = 0
 spot_range = 17.489

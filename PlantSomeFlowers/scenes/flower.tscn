@@ -13,11 +13,11 @@ collision_mask = 0
 script = ExtResource("1_un1qg")
 
 [node name="View" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.54951, 0, 0, 0, 1.54951, 0, 0, 0, 1.54951, 0, 0, 0)
+transform = Transform3D(2.26281, 0, 0, 0, 2.30722, 0, 0, 0, 2.26281, 0, 0, 0)
 mesh = ExtResource("2_xxtvc")
 
 [node name="collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.54951, 0, 0, 0, 1.54951, 0, 0, 0, 1.54951, 0, 0, 0)
+transform = Transform3D(2.26281, 0, 0, 0, 2.30722, 0, 0, 0, 2.26281, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_wxc4j")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
