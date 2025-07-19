@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blj3ogahcb4px"
-path.s3tc="res://.godot/imported/back_ground.png-16aed2bd17d2777e23cbdb34896c7d92.s3tc.ctex"
+uid="uid://chlg8vl7m18v7"
+path.s3tc="res://.godot/imported/base_color.png-ea3f49a4b197c00e6ee6c5d35ebf374c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/images/back_ground.png"
-dest_files=["res://.godot/imported/back_ground.png-16aed2bd17d2777e23cbdb34896c7d92.s3tc.ctex"]
+source_file="res://assets/images/cards/collect/base_color.png"
+dest_files=["res://.godot/imported/base_color.png-ea3f49a4b197c00e6ee6c5d35ebf374c.s3tc.ctex"]
 
 [params]
 

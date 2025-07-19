@@ -1,15 +1,16 @@
 extends StaticBody3D
 class_name Flower
 
+@export var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.默认
+
 @onready var view: MeshInstance3D = $View
 @onready var collider: CollisionShape3D = $collider
 @onready var outline: Node = $OutlineHighlighter
 
-var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.幼苗
-
 
 func _ready() -> void:
 	add_to_group("Flower")
+	outline.initialize_node()
 	_initialize()
 	GlobalSignalBus.card_used.connect(_on_card_used)
 

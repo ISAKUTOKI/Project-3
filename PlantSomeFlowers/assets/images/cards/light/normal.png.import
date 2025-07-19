@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://15sx83xlg6nb"
-path.s3tc="res://.godot/imported/ao.png-ce0de75fcfd55796bd5053269cd66233.s3tc.ctex"
+uid="uid://dhn1e2j4ld80g"
+path.s3tc="res://.godot/imported/normal.png-8c6994afba1dbc9a2ab27714063c4c3f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/images/cards/water/ao.png"
-dest_files=["res://.godot/imported/ao.png-ce0de75fcfd55796bd5053269cd66233.s3tc.ctex"]
+source_file="res://assets/images/cards/light/normal.png"
+dest_files=["res://.godot/imported/normal.png-8c6994afba1dbc9a2ab27714063c4c3f.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=8
-roughness/src_normal="res://assets/images/cards/collect/normal.png"
+roughness/mode=1
+roughness/src_normal="res://assets/images/cards/light/normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

@@ -1,14 +1,14 @@
 extends StaticBody3D
 class_name Card
 
-@export var card_type: CardStats.CardType = CardStats.CardType.浇水
+@export var card_type: CardStats.CardType = CardStats.CardType.默认
 
 @onready var view: MeshInstance3D = $View
 @onready var collider: CollisionShape3D = $Collider
 @onready var outline: Node = $OutlineHighlighter
 @onready var used_effect: GPUParticles3D = $UsedEffect
 
-var material = null
+var material: StandardMaterial3D = null
 
 var is_dragging: bool = false
 var original_pos: Vector3
@@ -25,8 +25,8 @@ func _ready() -> void:
 
 func _initialize():
 	material = CardStats.CARD_MATERIAL[card_type]
-	view.mesh.surface_set_material(0, material)
-	hide_outline()
+	view.set_surface_override_material(0, material)
+	#hide_outline()
 
 
 #region 边缘线高亮

@@ -4,34 +4,41 @@ extends Node
 @export_color_no_alpha var color: Color = Color(1, 1, 1, 1)
 @export_range(1.0, 1.5) var thickness: float = 1.07
 
-var material: ShaderMaterial
+var material: StandardMaterial3D
+var material_next_pass
 
 
-func _ready() -> void:
-	# 获取原始材质并创建独立副本
-	var original_material = target.get_active_material(0)
-	if original_material:
-		# 复制主材质和它的next_pass
-		var material_copy = original_material.duplicate()
-		if original_material.next_pass:
-			material_copy.next_pass = original_material.next_pass.duplicate()
-		target.set_surface_override_material(0, material_copy)
-		material = material_copy.next_pass
+func initialize_node() -> void:
+	var _original_mat := target.mesh.surface_get_material(0)
+	# 副本化material
+	var _material_copy = _original_mat.duplicate(true)
+	# 副本化material的next_pass
+	var _material_next_pass_copy = _original_mat.next_pass.duplicate(true)
+	_material_copy.next_pass = _material_next_pass_copy
+	# 设置材质
+	target.set_surface_override_material(0, _material_copy)
+	# 设置变量
+	material = target.get_surface_override_material(0)
+	# TODO 着为什么会是空值呢？为什么呢？？？？？？？？
+	material_next_pass = material.next_pass
+	# 初始化
 	_initialize()
 
 
 func _initialize():
-	if material == null:
+	if material_next_pass == null:
 		return
-	material.set_shader_parameter("color", color)
-	material.set_shader_parameter("thickness", thickness)
+	material_next_pass.set_shader_parameter("color", color)
+	material_next_pass.set_shader_parameter("thickness", thickness)
+	hide()
 
 
 func show():
-	if material:
-		material.set_shader_parameter("color", color)
+	material_next_pass.set_shader_parameter("color", color)
 
 
 func hide():
-	if material:
-		material.set_shader_parameter("color", Color(color.r, color.g, color.b, 0))
+	material_next_pass.set_shader_parameter("color", Color(color.r, color.g, color.b, 0))
+	print("隐藏了边缘线，来自于： ", get_parent().name)
+
+# TODO 修好这个该死的材质系统

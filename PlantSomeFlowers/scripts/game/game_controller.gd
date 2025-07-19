@@ -12,3 +12,8 @@ func start_a_shake(strength: GameManager.ShakeType, shake_time: float = 1):
 
 func stop_shake():
 	GlobalSignalBus.stop_shake.emit()
+
+
+func wait_frames(n: int = 1) -> void:
+	for i in n:
+		await get_tree().process_frame

@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://br3hks3qcwaq6" path="res://assets/images/walls/wall_5.png" id="10_ki6dw"]
 [ext_resource type="Texture2D" uid="uid://c83f6w2tma1cb" path="res://assets/images/walls/wall_6.png" id="11_261dj"]
 [ext_resource type="Texture2D" uid="uid://d2n1adjgj64pj" path="res://assets/images/walls/wall_7.png" id="12_8rcxb"]
-[ext_resource type="Texture2D" uid="uid://blj3ogahcb4px" path="res://assets/images/back_ground.png" id="14_fe0gr"]
+[ext_resource type="Texture2D" uid="uid://blj3ogahcb4px" path="res://assets/images/walls/back_ground.png" id="14_fe0gr"]
 [ext_resource type="Script" path="res://scripts/Decoration/top_lamp.gd" id="14_igfoy"]
 [ext_resource type="Texture2D" uid="uid://hwwqy3jsj6v" path="res://assets/images/lamp/lamp_rope.png" id="15_ebahb"]
 [ext_resource type="Texture2D" uid="uid://d3ow475r2wulo" path="res://assets/images/lamp/lamp.png" id="15_xhsrs"]
