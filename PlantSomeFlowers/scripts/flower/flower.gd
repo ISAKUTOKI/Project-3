@@ -4,12 +4,13 @@ class_name Flower
 @export var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.默认
 
 @onready var view: MeshInstance3D = $View
-@onready var collider: CollisionShape3D = $collider
+@onready var collider: CollisionShape3D = $Collider
 @onready var outline: Node = $OutlineHighlighter
 
 
 func _ready() -> void:
 	add_to_group("Flower")
+	view.mesh.surface_set_material(0, FlowerStats.FLOWER_MATERIAL[flower_type])
 	outline.initialize_node()
 	_initialize()
 	GlobalSignalBus.card_used.connect(_on_card_used)
@@ -43,15 +44,16 @@ func mouse_exited_card():
 #endregion
 
 
-func _on_card_used(card: CardStats.CardType):
-	match card:
+func _on_card_used(_card: Card):
+	var card_type=_card.card_type
+	match card_type:
 		CardStats.CardType.浇水:
-			print("使用了一张", CardStats.CARD_NAME[card])
+			print("使用了一张", CardStats.CARD_NAME[card_type])
 		CardStats.CardType.光照:
-			print("使用了一张", CardStats.CARD_NAME[card])
+			print("使用了一张", CardStats.CARD_NAME[card_type])
 		CardStats.CardType.修剪:
-			print("使用了一张", CardStats.CARD_NAME[card])
+			print("使用了一张", CardStats.CARD_NAME[card_type])
 		CardStats.CardType.捉虫:
-			print("使用了一张", CardStats.CARD_NAME[card])
+			print("使用了一张", CardStats.CARD_NAME[card_type])
 		CardStats.CardType.收获:
-			print("使用了一张", CardStats.CARD_NAME[card])
+			print("使用了一张", CardStats.CARD_NAME[card_type])

@@ -81,5 +81,3 @@ func _on_stop_shake():
 	await tween_2.finished
 	_initialize()
 	pass
-
-# TODO 修正结束动画//或者是更改震动效果

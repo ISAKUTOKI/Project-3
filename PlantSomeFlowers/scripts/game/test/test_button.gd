@@ -3,7 +3,6 @@ extends Button
 
 @export var use_this_test: bool = true
 @export var shake_strength: GameManager.ShakeType = GameManager.ShakeType.小震
-@onready var target_card: Card = $"../../HoldingCard/Card"
 @onready var button_1: Button = $"."
 @onready var button_2: Button = $Button2
 @onready var button_3: Button = $Button3
@@ -20,7 +19,7 @@ func _ready() -> void:
 	if button_2:
 		button_2.text = "停止震动"
 	if button_3:
-		button_3.text = "使用默认卡牌"
+		button_3.text = "重新排序"
 
 	if not use_button_1:
 		button_1.disabled = true
@@ -45,7 +44,5 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_button_3_pressed() -> void:
-	if get_node("../../HoldingCard/Card") == null:
-		return
-	target_card.card_is_used()
-	pass  # Replace with function body.
+	var holding_card = $"../../HoldingCard"
+	holding_card._rank_holding_card()

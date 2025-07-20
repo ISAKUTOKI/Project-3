@@ -136,10 +136,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07737, 0)
 current = true
 
 [node name="HoldingCard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00139892, 0, -0.000446737)
 script = ExtResource("4_mv6o5")
+rank_pos_offset = Vector3(0.5, 0, 0)
+rank_rot_offset = Vector3(0, 0, 0)
+original_initial_pos = Vector3(0, -0.2, 0)
 
-[node name="Card" parent="HoldingCard" instance=ExtResource("2_53evp")]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 5.96046e-08, 0.0725156, -0.355314)
+[node name="Empty" parent="HoldingCard" instance=ExtResource("2_53evp")]
+
+[node name="Water" parent="HoldingCard" instance=ExtResource("2_53evp")]
+card_type = 1
+
+[node name="Light" parent="HoldingCard" instance=ExtResource("2_53evp")]
+card_type = 2
 
 [node name="Flower" parent="." instance=ExtResource("5_4wu4f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34665, -4.70509)
@@ -186,7 +195,7 @@ texture = ExtResource("10_ki6dw")
 metadata/original_pos = Vector3(0, 0, 0)
 
 [node name="Wall6" type="Sprite3D" parent="Wall"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -0.2)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.00133044, -0.00131202, -0.199339)
 shaded = true
 alpha_cut = 2
 texture = ExtResource("11_261dj")
@@ -434,7 +443,6 @@ keep_pressed_outside = true
 text = "test"
 script = ExtResource("18_u5rgq")
 shake_strength = 2
-use_button_3 = false
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0

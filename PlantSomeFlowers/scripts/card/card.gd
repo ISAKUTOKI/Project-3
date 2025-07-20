@@ -25,8 +25,8 @@ func _ready() -> void:
 
 func _initialize():
 	material = CardStats.CARD_MATERIAL[card_type]
-	view.set_surface_override_material(0, material)
-	#hide_outline()
+	view.mesh.surface_set_material(0, material)
+	outline.initialize_node()
 
 
 #region 边缘线高亮
@@ -86,7 +86,7 @@ func card_is_used():
 	await get_tree().create_timer(used_effect.lifetime + 0.1).timeout
 
 	# 视觉与数据
-	GlobalSignalBus.card_used.emit(self.card_type)
+	GlobalSignalBus.card_used.emit(self)
 	var tween2 = create_tween()
 	tween2.tween_property(self, "scale", Vector3(0.001, 0.001, 0.001), 0.1)
 	await tween2.finished

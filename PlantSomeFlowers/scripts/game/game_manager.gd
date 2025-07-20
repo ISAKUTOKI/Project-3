@@ -5,7 +5,6 @@ extends Node
 ## 负责管理游戏的状态
 
 const CARD_SIZE: Vector3 = Vector3(0.5, 0.85, 0.01)  # 宽、高、厚
-var current_holding_card: Array = []
 var current_game_stats: GameStats
 
 enum ShakeType { 小震, 中震, 强震 }

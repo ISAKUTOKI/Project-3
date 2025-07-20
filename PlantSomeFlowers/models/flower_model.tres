@@ -1,25 +1,6 @@
-[gd_resource type="ArrayMesh" load_steps=7 format=4 uid="uid://dq370rwxqf4e1"]
+[gd_resource type="ArrayMesh" load_steps=2 format=4 uid="uid://dq370rwxqf4e1"]
 
-[ext_resource type="Texture2D" uid="uid://dc8pbcsjulnn2" path="res://assets/images/flowers/empty/base_color.png" id="1_0240s"]
-[ext_resource type="Texture2D" uid="uid://bf66i85jfskng" path="res://assets/images/flowers/empty/ao.png" id="2_42vqs"]
-[ext_resource type="Material" uid="uid://dctuir8xbav1n" path="res://sources/normal_based_outline.tres" id="3_qx4nu"]
-[ext_resource type="Texture2D" uid="uid://d0umpbtimnkxh" path="res://assets/images/flowers/empty/normal.png" id="4_sgylo"]
-[ext_resource type="Texture2D" uid="uid://d3423g45uh32f" path="res://assets/images/flowers/empty/roughness.png" id="5_g6uti"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj5dx"]
-next_pass = ExtResource("3_qx4nu")
-albedo_texture = ExtResource("1_0240s")
-roughness_texture = ExtResource("5_g6uti")
-roughness_texture_channel = 4
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 7.52
-emission_operator = 1
-normal_enabled = true
-normal_scale = 3.0
-normal_texture = ExtResource("4_sgylo")
-ao_enabled = true
-ao_texture = ExtResource("2_42vqs")
-ao_texture_channel = 4
+[ext_resource type="Material" uid="uid://bji4uy0ox8k7v" path="res://materials/flowers/flower_empty.tres" id="1_rivv8"]
 
 [resource]
 _surfaces = [{
@@ -28,7 +9,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 756,
 "index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8AMAAxADIAMgAxADMANAA1ADYANgA1ADcAOAA5ADoAOgA5ADsAPAA9AD4APgA9AD8AQABBAEIAQgBBAEMARABFAEYARgBFAEcASABJAEoASgBJAEsATABNAE4ATgBNAE8AUABRAFIAUgBRAFMAVABVAFYAVgBVAFcAWABZAFoAWgBZAFsAXABdAF4AXgBdAF8AYABhAGIAYgBhAGMAZABlAGYAZgBlAGcAaABpAGoAagBpAGsAbABtAG4AbgBtAG8AcABxAHIAcgBxAHMAdAB1AHYAdgB1AHcAeAB5AHoAegB5AHsAfAB9AH4AfgB9AH8AgACBAIIAggCBAIMAhACFAIYAhgCFAIcAiACJAIoAigCJAIsAjACNAI4AjgCNAI8AkACRAJIAkgCRAJMAlACVAJYAlgCVAJcAmACZAJoAmgCZAJsAnACdAJ4AngCdAJ8AoAChAKIAogChAKMAowChAKQApAChAKUApQChAKYApgChAKcApwChAKgAqAChAKkAqQChAKoAqgChAKsAqwChAKwArAChAK0ArQChAK4ArgChAK8AsACxALIAsgCxALMAtAC1ALYAtgC1ALcAtwC1ALgAuAC1ALkAuQC1ALoAugC1ALsAuwC1ALwAvAC1AL0AvQC1AL4AvgC1AL8AvwC1AMAAwAC1AMEAwQC1AMIAwgC1AMMAxADFAMYAxgDFAMcAyADJAMoAygDJAMsAzADNAM4AzgDNAM8A0ADRANIA0gDRANMA1ADVANYA1gDVANcA2ADZANoA2gDZANsA3ADdAN4A3gDdAN8A4ADhAOIA4gDhAOMA5ADlAOYA5gDlAOcA6ADpAOoA6gDpAOsA7ADtAO4A7gDtAO8A8ADxAPIA8gDxAPMA9AD1APYA9gD1APcA+AD5APoA+gD5APsA/AD9AP4A/gD9AP8AAAEBAQIBAgEBAQMBBAEFAQYBBgEFAQcBCAEJAQoBCgEJAQsBDAENAQ4BDgENAQ8BEAERARIBEgERARMBFAEVARYBFgEVARcBGAEZARoBGgEZARsBHAEdAR4BHgEdAR8BIAEhASIBIgEhASMBJAElASYBJgElAScBKAEpASoBKgEpASsBLAEtAS4BLgEtAS8BMAExATIBMgExATMBNAE1ATYBNgE1ATcBOAE5AToBOgE5ATsBPAE9AT4BPgE9AT8BQAFBAUIBQgFBAUMBnACeAFEAUQCeAFMAhwCFAFIAUgCFAFAARAFFAUYBRgFFAUcBmACaAJ0AnQCaAJ8ASAFJAUoBSgFJAUsBiwCJAIYAhgCJAIQATAFNAU4BTgFNAU8BjwCNAIoAigCNAIgAUAFRAVIBUgFRAVMBkwCRAI4AjgCRAIwAVAFVAVYBVgFVAVcBlwCVAJIAkgCVAJAAWAFZAVoBWgFZAVsBmwCZAFwBXAGZAF0BXgFfAWABYAFfAWEBYgFjAWQBZAFjAWUBZgFnAWgBaAFnAWkBagFrAWwBbAFrAW0BbgFvAXABcAFvAXEBcgFzAXQBdAFzAXUBdgF3AXgBeAF3AXkBegF7AXwBfAF7AX0BfgF/AYABgAF/AYEBggGDAYQBhAGDAYUBhgGHAYgBiAGHAYkBigGLAYwBjAGLAY0BjgGPAZABkAGPAZEBkgGTAZQBlAGTAZUBlgGXAZgBmAGXAZkBmgGbAZwBnAGbAZ0BngGfAaABoAGfAaEBogGjAaQBpAGjAaUBpgGnAagBqAGnAakBqgGrAawBrAGrAa0BrgGvAbABsAGvAbEBsgGzAbQBtAGzAbUBtgG3AbgBuAG3AbkBugG7AbwBvAG7Ab0BvgG/AcABwAG/AcEB"),
-"material": SubResource("StandardMaterial3D_nj5dx"),
+"material": ExtResource("1_rivv8"),
 "name": "花瓶",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

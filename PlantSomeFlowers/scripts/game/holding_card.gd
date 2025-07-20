@@ -1,55 +1,77 @@
 extends Node3D
 
-var holding_card := []
+var holding_card_object := []
+var holding_card_type := []
 var hloding_card_name := []
 var card: PackedScene = preload("res://scenes/card.tscn")
 
-@export var rank_offset: Vector3 = Vector3(0.4, 0, 0.8)  # x, y, z
+@export var rank_pos_offset: Vector3 = Vector3(0.4, -0.05, 0)
+@export var rank_rot_offset: Vector3 = Vector3(0, -20, -3)
+#@export var ranl_center_distance: Vector3 = Vector3(0, 0, -0.15)
 
-@export var initial_pos: Vector3 = Vector3(0, 0.07, -0.35)  # x, y, z
-@export var initial_rot: Vector3 = Vector3(-40, 0, 0)  # 本地x轴旋转度数
+#region 测试用数据
+@export var original_initial_pos: Vector3 = Vector3(0, 0.07, -0.35)
+@export var original_initial_rot: Vector3 = Vector3(-40, 0, 0)  # 本地x轴旋转度数
+var initial_pos: Vector3 = original_initial_pos
+var initial_rot: Vector3 = original_initial_rot
+#endregion
 
 
 func _ready() -> void:
-	_initialize()
-	_test()
 	GlobalSignalBus.start_shake.connect(_on_start_shake)
 	GlobalSignalBus.stop_shake.connect(_on_stop_shake)
 
+	GlobalSignalBus.card_drew.connect(_on_draw_card)
+	GlobalSignalBus.card_used.connect(_on_use_card)
+	_test()
+
 
 func _test():
-	holding_card = get_children()
-	for i in holding_card:
-		i.position = initial_pos
-		i.rotation_degrees = initial_rot
-		#print("card.rotation: ", i.rotation, "    ", "initial_rot: ", initial_rot)
-
+	holding_card_object = get_children()
+	_rank_holding_card()
+	for i in holding_card_object:
 		i.original_pos = i.position
 		i.original_rot = i.rotation_degrees
 		i.original_sca = i.scale
+		holding_card_type.push_back(i.card_type)
 		hloding_card_name.push_back(CardStats.CARD_NAME[i.card_type])
-	print(hloding_card_name)
+	#print("当前手牌： ", holding_card_type)
+	#print("当前手牌： ", hloding_card_name)
 
 
-func _initialize():
-	holding_card.clear()
-	original_pos = position
+func _on_draw_card(drew_card):
+	holding_card_object.push_back(drew_card)
+	_rank_holding_card()
 
 
-func draw_card(drew_card):
-	GameManager.current_holding_card.push_back(drew_card)
-
-
-func use_card(used_card):
-	GameManager.current_holding_card.erase(used_card)
+func _on_use_card(used_card):
+	holding_card_object.erase(used_card)
+	_rank_holding_card()
 
 
 func _rank_holding_card():
-	for i in holding_card:
-		pass
+	# TODO 处理排序手牌的逻辑
+	var _x_offset = (holding_card_object.size() - 1) * rank_pos_offset.x * 0.5 * -1
+	print("holding_card_object.size:  ",holding_card_object.size())
+	print("_x_offset:  ",_x_offset)
+	initial_pos = Vector3(
+		original_initial_pos.x + _x_offset, original_initial_pos.y, original_initial_pos.z
+	)
 
+	for i in range(holding_card_object.size()):
+		var card_node = holding_card_object[i]
+		# 计算偏移位置
+		var target_pos = (
+			initial_pos + Vector3(rank_pos_offset.x * i, rank_pos_offset.y * i, rank_pos_offset.z * i)
+		)
+		var target_rot = (
+			initial_rot + Vector3(rank_rot_offset.x * i, rank_rot_offset.y * i, rank_rot_offset.z * i)
+		)
+		#print(card_node.name, "   ", target_pos)
+		card_node.position = target_pos
+		# 保持旋转一致
+		card_node.rotation_degrees = target_rot
 
-# TODO 处理排序手牌的逻辑
 
 #region 震动时隐藏手牌
 var original_pos: Vector3

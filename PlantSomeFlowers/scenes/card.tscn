@@ -75,10 +75,12 @@ collision_mask = 0
 script = ExtResource("1_csq2x")
 
 [node name="View" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.424567, 0)
 layers = 2
 mesh = ExtResource("2_e1t0a")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.424567, 0)
 shape = SubResource("BoxShape3D_8d1w4")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
@@ -87,6 +89,7 @@ color = Color(0.858679, 0.749935, 0.655972, 1)
 thickness = 1.05
 
 [node name="UsedEffect" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.446822, 0)
 emitting = false
 amount = 20
 lifetime = 0.25

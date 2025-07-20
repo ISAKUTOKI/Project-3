@@ -20,9 +20,9 @@ const CARD_NAME:={
 
 const CARD_MATERIAL:={
 	CardType.默认: preload("res://materials/cards/card_empty.tres"),
-	#CardType.浇水: preload(),
-	#CardType.光照: preload(),
-	#CardType.修剪: preload(),
-	#CardType.捉虫: preload(),
+	CardType.浇水: preload("res://materials/cards/card_water.tres"),
+	CardType.光照: preload("res://materials/cards/card_light.tres"),
+	CardType.修剪: preload("res://materials/cards/card_trim.tres"),
+	CardType.捉虫: preload("res://materials/cards/card_insecticide.tres"),
 	CardType.收获: preload("res://materials/cards/card_collect.tres"),
 }

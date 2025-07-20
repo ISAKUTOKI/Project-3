@@ -16,8 +16,8 @@ script = ExtResource("1_un1qg")
 transform = Transform3D(2.26281, 0, 0, 0, 2.30722, 0, 0, 0, 2.26281, 0, 0, 0)
 mesh = ExtResource("2_xxtvc")
 
-[node name="collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.26281, 0, 0, 0, 2.30722, 0, 0, 0, 2.26281, 0, 0, 0)
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.263, 0, 0, 0, 2.263, 0, 0, 0, 2.263, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_wxc4j")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
