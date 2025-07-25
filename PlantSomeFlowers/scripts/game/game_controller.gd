@@ -17,3 +17,8 @@ func stop_shake():
 func wait_frames(n: int = 1) -> void:
 	for i in n:
 		await get_tree().process_frame
+
+
+# TODO 完成故事线
+# TODO 完成开头画面
+# TODO 完成控制选项的卡牌

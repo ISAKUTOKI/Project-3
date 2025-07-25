@@ -139,7 +139,6 @@ current = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00139892, 0, -0.000446737)
 script = ExtResource("4_mv6o5")
 rank_pos_offset = Vector3(0.5, 0, 0)
-rank_rot_offset = Vector3(0, 0, 0)
 original_initial_pos = Vector3(0, -0.2, 0)
 
 [node name="Empty" parent="HoldingCard" instance=ExtResource("2_53evp")]
@@ -156,6 +155,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34665, -4.70509)
 [node name="Wall" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
 script = ExtResource("6_xoy7x")
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Wall1" type="Sprite3D" parent="Wall"]

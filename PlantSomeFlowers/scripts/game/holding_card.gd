@@ -6,8 +6,6 @@ var hloding_card_name := []
 var card: PackedScene = preload("res://scenes/card.tscn")
 
 @export var rank_pos_offset: Vector3 = Vector3(0.4, -0.05, 0)
-@export var rank_rot_offset: Vector3 = Vector3(0, -20, -3)
-#@export var ranl_center_distance: Vector3 = Vector3(0, 0, -0.15)
 
 #region 测试用数据
 @export var original_initial_pos: Vector3 = Vector3(0, 0.07, -0.35)
@@ -50,10 +48,9 @@ func _on_use_card(used_card):
 
 
 func _rank_holding_card():
-	# TODO 处理排序手牌的逻辑
 	var _x_offset = (holding_card_object.size() - 1) * rank_pos_offset.x * 0.5 * -1
 	print("holding_card_object.size:  ",holding_card_object.size())
-	print("_x_offset:  ",_x_offset)
+	#print("_x_offset:  ",_x_offset)
 	initial_pos = Vector3(
 		original_initial_pos.x + _x_offset, original_initial_pos.y, original_initial_pos.z
 	)
@@ -64,13 +61,8 @@ func _rank_holding_card():
 		var target_pos = (
 			initial_pos + Vector3(rank_pos_offset.x * i, rank_pos_offset.y * i, rank_pos_offset.z * i)
 		)
-		var target_rot = (
-			initial_rot + Vector3(rank_rot_offset.x * i, rank_rot_offset.y * i, rank_rot_offset.z * i)
-		)
-		#print(card_node.name, "   ", target_pos)
 		card_node.position = target_pos
-		# 保持旋转一致
-		card_node.rotation_degrees = target_rot
+		card_node.rotation_degrees = initial_rot
 
 
 #region 震动时隐藏手牌
@@ -88,3 +80,5 @@ func _on_stop_shake():
 	tween.tween_property(self, "position", original_pos, 0.1)
 	pass
 #endregion
+
+# TODO 完成卡牌的抽取逻辑
