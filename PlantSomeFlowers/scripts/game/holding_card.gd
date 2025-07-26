@@ -77,13 +77,19 @@ func _print_current_holding_card_info():
 	print("__________")
 
 
-func _clear_holding_card():
+func clear_holding_card():
 	if holding_card_object.size() == 0:
+		print("没有手牌了")
 		return
+	#print(self.name,"  -test-")
 	for i in holding_card_object:
-		if i == Card:
 			i.queue_free()
-			holding_card_object.erase(i)
+	GameController.wait_frames()
+	holding_card_object.clear()
+	holding_card_type.clear()
+	holding_card_name.clear()
+	#_print_current_holding_card_info()
+	_rank_holding_card()
 
 
 #region 震动时隐藏手牌
@@ -101,5 +107,3 @@ func _on_stop_shake():
 	tween.tween_property(self, "position", original_pos, 0.1)
 	pass
 #endregion
-
-# TODO 完成卡牌的抽取逻辑

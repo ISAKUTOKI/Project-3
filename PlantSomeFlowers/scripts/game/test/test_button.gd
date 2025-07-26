@@ -19,7 +19,7 @@ extends Button
 func _ready() -> void:
 	self.text = str("抽一张", CardStats.CARD_NAME[card_type])
 	if button_2:
-		button_2.text = "停止震动"
+		button_2.text = "清空手牌"
 	if button_3:
 		button_3.text = "重新排序"
 
@@ -34,14 +34,16 @@ func _ready() -> void:
 		button_3.visible = false
 
 
+@onready var holding_card = $"../../HoldingCard"
+
+
 func _on_button_1_pressed() -> void:
 	GameController.drow_card(card_type)
 
 
 func _on_button_2_pressed() -> void:
-	GameController.stop_shake()
+	holding_card.clear_holding_card()
 
 
 func _on_button_3_pressed() -> void:
-	var holding_card = $"../../HoldingCard"
 	holding_card._rank_holding_card()

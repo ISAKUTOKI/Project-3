@@ -435,7 +435,6 @@ text = "test"
 script = ExtResource("18_u5rgq")
 shake_strength = 2
 card_type = 1
-use_button_2 = false
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0
