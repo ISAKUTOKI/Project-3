@@ -4,6 +4,8 @@ extends Node
 ## 负责记录游戏的数据
 ## 负责管理游戏的状态
 
+var card: PackedScene = preload("res://scenes/card.tscn")
+
 const CARD_SIZE: Vector3 = Vector3(0.5, 0.85, 0.01)  # 宽、高、厚
 var current_game_stats: GameStats
 

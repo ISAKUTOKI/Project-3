@@ -1,8 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://dacqyvouwyfoi"]
+[gd_scene load_steps=31 format=3 uid="uid://dacqyvouwyfoi"]
 
 [ext_resource type="Environment" uid="uid://cg7dfw7y7a3kv" path="res://sources/world_fog.tres" id="1_jihj1"]
 [ext_resource type="PackedScene" uid="uid://d264myuaqqn1e" path="res://scenes/main_camera.tscn" id="1_twdig"]
-[ext_resource type="PackedScene" uid="uid://crwsqfckfxrt5" path="res://scenes/card.tscn" id="2_53evp"]
 [ext_resource type="Script" path="res://scripts/game/game_controller.gd" id="3_yc1me"]
 [ext_resource type="Script" path="res://scripts/game/game_manager.gd" id="4_71wmt"]
 [ext_resource type="Script" path="res://scripts/game/holding_card.gd" id="4_mv6o5"]
@@ -140,14 +139,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00139892, 0, -0.000446737)
 script = ExtResource("4_mv6o5")
 rank_pos_offset = Vector3(0.5, 0, 0)
 original_initial_pos = Vector3(0, -0.2, 0)
-
-[node name="Empty" parent="HoldingCard" instance=ExtResource("2_53evp")]
-
-[node name="Water" parent="HoldingCard" instance=ExtResource("2_53evp")]
-card_type = 1
-
-[node name="Light" parent="HoldingCard" instance=ExtResource("2_53evp")]
-card_type = 2
 
 [node name="Flower" parent="." instance=ExtResource("5_4wu4f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34665, -4.70509)
@@ -443,6 +434,8 @@ keep_pressed_outside = true
 text = "test"
 script = ExtResource("18_u5rgq")
 shake_strength = 2
+card_type = 1
+use_button_2 = false
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0
@@ -464,6 +457,6 @@ script = ExtResource("3_yc1me")
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_71wmt")
 
-[connection signal="pressed" from="Test/Button1" to="Test/Button1" method="_on_button_1pressed"]
+[connection signal="pressed" from="Test/Button1" to="Test/Button1" method="_on_button_1_pressed"]
 [connection signal="pressed" from="Test/Button1/Button2" to="Test/Button1" method="_on_button_2_pressed"]
 [connection signal="pressed" from="Test/Button1/Button3" to="Test/Button1" method="_on_button_3_pressed"]

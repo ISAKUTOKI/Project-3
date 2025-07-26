@@ -2,8 +2,7 @@ extends Node3D
 
 var holding_card_object := []
 var holding_card_type := []
-var hloding_card_name := []
-var card: PackedScene = preload("res://scenes/card.tscn")
+var holding_card_name := []
 
 @export var rank_pos_offset: Vector3 = Vector3(0.4, -0.05, 0)
 
@@ -25,44 +24,66 @@ func _ready() -> void:
 
 
 func _test():
-	holding_card_object = get_children()
-	_rank_holding_card()
-	for i in holding_card_object:
-		i.original_pos = i.position
-		i.original_rot = i.rotation_degrees
-		i.original_sca = i.scale
-		holding_card_type.push_back(i.card_type)
-		hloding_card_name.push_back(CardStats.CARD_NAME[i.card_type])
+	GameController.drow_card(CardStats.CardType.浇水)
+	GameController.drow_card(CardStats.CardType.浇水)
+	GameController.drow_card(CardStats.CardType.光照)
+	GameController.drow_card(CardStats.CardType.浇水)
+	GameController.drow_card(CardStats.CardType.修剪)
 	#print("当前手牌： ", holding_card_type)
 	#print("当前手牌： ", hloding_card_name)
 
 
-func _on_draw_card(drew_card):
+func _on_draw_card(drew_card: Card):
+	add_child(drew_card)
 	holding_card_object.push_back(drew_card)
+	holding_card_type.push_back(drew_card.card_type)
+	holding_card_name.push_back(CardStats.CARD_NAME[drew_card.card_type])
 	_rank_holding_card()
 
 
-func _on_use_card(used_card):
+func _on_use_card(used_card: Card):
 	holding_card_object.erase(used_card)
+	holding_card_type.erase(used_card.card_type)
+	holding_card_name.erase(CardStats.CARD_NAME[used_card.card_type])
 	_rank_holding_card()
 
 
 func _rank_holding_card():
 	var _x_offset = (holding_card_object.size() - 1) * rank_pos_offset.x * 0.5 * -1
-	print("holding_card_object.size:  ",holding_card_object.size())
+	#print("holding_card_object.size:  ", holding_card_object.size())
 	#print("_x_offset:  ",_x_offset)
 	initial_pos = Vector3(
 		original_initial_pos.x + _x_offset, original_initial_pos.y, original_initial_pos.z
 	)
-
 	for i in range(holding_card_object.size()):
 		var card_node = holding_card_object[i]
 		# 计算偏移位置
 		var target_pos = (
 			initial_pos + Vector3(rank_pos_offset.x * i, rank_pos_offset.y * i, rank_pos_offset.z * i)
 		)
+		# 赋值
 		card_node.position = target_pos
 		card_node.rotation_degrees = initial_rot
+		# 记录
+		card_node.original_pos = card_node.position
+		card_node.original_rot = card_node.rotation_degrees
+		card_node.original_sca = card_node.scale
+	#_print_current_holding_card_info()
+
+
+func _print_current_holding_card_info():
+	print("card_type: ", holding_card_type)
+	print("card_name: ", holding_card_name)
+	print("__________")
+
+
+func _clear_holding_card():
+	if holding_card_object.size() == 0:
+		return
+	for i in holding_card_object:
+		if i == Card:
+			i.queue_free()
+			holding_card_object.erase(i)
 
 
 #region 震动时隐藏手牌

@@ -19,6 +19,11 @@ func wait_frames(n: int = 1) -> void:
 		await get_tree().process_frame
 
 
+func drow_card(_card_type: CardStats.CardType):
+	var target_card = GameManager.card.instantiate()
+	target_card.card_type = _card_type
+	GlobalSignalBus.card_drew.emit(target_card)
+
 # TODO 完成故事线
 # TODO 完成开头画面
 # TODO 完成控制选项的卡牌
