@@ -1,9 +1,9 @@
 [gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://b8bmfjonxioe7"]
 
-[ext_resource type="Texture2D" uid="uid://b6skp88jpvtt" path="res://assets/images/flowers/flower_down_5_base_color.png" id="1_6jfnc"]
+[ext_resource type="Texture2D" uid="uid://bxj78i3y2wdib" path="res://assets/images/flowers/flower_down_4_base_color.png" id="1_0l1cr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5mak"]
-albedo_texture = ExtResource("1_6jfnc")
+albedo_texture = ExtResource("1_0l1cr")
 
 [resource]
 _surfaces = [{

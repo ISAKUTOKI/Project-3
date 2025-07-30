@@ -10,6 +10,7 @@ extends Camera3D
 var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
 var can_rotate_camera: bool = false
 var original_pos: Vector3
+var original_rot_deg: Vector3
 
 @export_group("相机角度钳制")
 @export var camera_angle_limit_x: float = 35  # 上下角度限制(度数)
@@ -42,6 +43,8 @@ func _input(event):
 func _intialize_camera():
 	self.fov = camera_fov
 	self.far = camera_far
+	original_pos = self.position
+	original_rot_deg = self.rotation_degrees
 	raycast.enabled = true
 	add_to_group("Camera")
 
@@ -61,9 +64,17 @@ func _rotate_local_x(event):
 func _clamp_rotation():
 	var current_rotation_deg = rotation_degrees
 	# 钳制X轴旋转
-	current_rotation_deg.x = clamp(current_rotation_deg.x, -camera_angle_limit_x, camera_angle_limit_x)
+	current_rotation_deg.x = clamp(
+		current_rotation_deg.x,
+		original_rot_deg.x - camera_angle_limit_x,
+		original_rot_deg.x + camera_angle_limit_x
+	)
 	# 钳制Y轴旋转
-	current_rotation_deg.y = clamp(current_rotation_deg.y, -camera_angle_limit_y, camera_angle_limit_y)
+	current_rotation_deg.y = clamp(
+		current_rotation_deg.y,
+		original_rot_deg.y - camera_angle_limit_y,
+		original_rot_deg.y + camera_angle_limit_y
+	)
 	# 限制z轴保证相机稳定
 	current_rotation_deg.z = 0
 	# 应用钳制后的旋转
@@ -105,7 +116,7 @@ func _on_start_shake(_shake_strength: GameManager.ShakeType):
 	# 处理逻辑
 	set_process_input(false)
 	is_shaking = true
-	original_pos = self.position
+
 	# 视角
 	match _shake_strength:
 		GameManager.ShakeType.小震:

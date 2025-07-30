@@ -1,7 +1,7 @@
 extends StaticBody3D
 class_name Flower
 
-@export var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.默认
+@export var flower_type: FlowerStats.FlowerType = FlowerStats.FlowerType.幼苗
 
 @onready var flower_pot: MeshInstance3D = $View
 @onready var flower_up: MeshInstance3D = $View/FlowerUp
@@ -15,10 +15,9 @@ func _ready() -> void:
 	add_to_group("Flower")
 	outline.initialize_node()
 	_initialize()
-	GlobalSignalBus.card_used.connect(_on_card_used)
 
-	GlobalSignalBus.start_shake.connect(_on_start_shake)
-	GlobalSignalBus.stop_shake.connect(_on_stop_shake)
+	GlobalSignalBus.card_used.connect(_on_card_used)
+	GlobalSignalBus.flower_update_stats.connect(_on_flower_update_stats)
 
 
 func _initialize():
@@ -49,30 +48,20 @@ func mouse_exited_card():
 #endregion
 
 
-func _on_start_shake():
-	pass
-
-
-func _on_stop_shake():
-	pass
-
-
 func _on_card_used(_card: Card):
-	var card_type = _card.card_type
-	match card_type:
-		CardStats.CardType.浇水:
-			print("使用了一张", CardStats.CARD_NAME[card_type])
-		CardStats.CardType.光照:
-			print("使用了一张", CardStats.CARD_NAME[card_type])
-		CardStats.CardType.修剪:
-			print("使用了一张", CardStats.CARD_NAME[card_type])
-		CardStats.CardType.捉虫:
-			print("使用了一张", CardStats.CARD_NAME[card_type])
-		CardStats.CardType.收获:
-			print("使用了一张", CardStats.CARD_NAME[card_type])
+	if _card.card_type == CardStats.CardType.收获:
+		_harvest()
 
 
-func _grow_up():
+func _on_flower_update_stats(_flower_type: FlowerStats.FlowerType):
+	if _flower_type == FlowerStats.FlowerType.成枝 or _flower_type == FlowerStats.FlowerType.开花:
+		flower_up.mesh = FlowerStats.FLOWER_UP_MODEL[_flower_type]
+	else:
+		flower_up.mesh = null
+	flower_down.mesh = FlowerStats.FLOWER_DOWN_MODEL[_flower_type]
+	#print(self.name,"执行无误")
+
+func _harvest():
 	pass
 
 

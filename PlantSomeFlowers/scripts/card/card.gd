@@ -86,7 +86,7 @@ func card_is_used():
 	await get_tree().create_timer(used_effect.lifetime + 0.1).timeout
 
 	# 视觉与数据
-	GlobalSignalBus.card_used.emit(self)
+	GameController.use_card(self)
 	var tween2 = create_tween()
 	tween2.tween_property(self, "scale", Vector3(0.001, 0.001, 0.001), 0.1)
 	await tween2.finished

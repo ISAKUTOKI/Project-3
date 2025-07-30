@@ -1,9 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://dacqyvouwyfoi"]
+[gd_scene load_steps=29 format=3 uid="uid://dacqyvouwyfoi"]
 
 [ext_resource type="Environment" uid="uid://cg7dfw7y7a3kv" path="res://sources/world_fog.tres" id="1_jihj1"]
 [ext_resource type="PackedScene" uid="uid://d264myuaqqn1e" path="res://scenes/main_camera.tscn" id="1_twdig"]
-[ext_resource type="Script" path="res://scripts/game/game_controller.gd" id="3_yc1me"]
-[ext_resource type="Script" path="res://scripts/game/game_manager.gd" id="4_71wmt"]
 [ext_resource type="Script" path="res://scripts/game/holding_card.gd" id="4_mv6o5"]
 [ext_resource type="PackedScene" uid="uid://djcoiwc3uaj7k" path="res://scenes/flower.tscn" id="5_4wu4f"]
 [ext_resource type="Texture2D" uid="uid://bngovdjp51bfv" path="res://assets/images/walls/wall_1.png" id="6_6ixhy"]
@@ -25,8 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://oph00urdj3sd" path="res://assets/images/lamp/light_2.png" id="19_8ckt6"]
 [ext_resource type="Texture2D" uid="uid://cavv68tb5cl46" path="res://assets/images/lamp/light_3.png" id="20_2o4wj"]
 [ext_resource type="Texture2D" uid="uid://dvcrsiymsbqpv" path="res://assets/images/lamp/light_4.png" id="21_jdf11"]
+[ext_resource type="ArrayMesh" uid="uid://crvf2jfvl4l6f" path="res://models/table_model.tres" id="23_2i186"]
 [ext_resource type="Animation" uid="uid://33wsij4wgbix" path="res://animations/lamp_light.res" id="23_hpp3k"]
-[ext_resource type="Animation" uid="uid://5d7qkvl1isfd" path="res://animations/lamp_shake.res" id="24_vsacy"]
+[ext_resource type="Script" path="res://scripts/test.gd" id="24_7m7sj"]
 
 [sub_resource type="Animation" id="Animation_d3r5n"]
 length = 0.001
@@ -118,12 +117,8 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4xy5"]
 _data = {
 "RESET": SubResource("Animation_d3r5n"),
-"lamp_light": ExtResource("23_hpp3k"),
-"lamp_shake": ExtResource("24_vsacy")
+"lamp_light": ExtResource("23_hpp3k")
 }
-
-[sub_resource type="BoxMesh" id="BoxMesh_n88va"]
-size = Vector3(4.215, 0.355, 2.425)
 
 [node name="Node3D" type="Node3D"]
 
@@ -141,7 +136,7 @@ rank_pos_offset = Vector3(0.5, 0, 0)
 original_initial_pos = Vector3(0, -0.2, 0)
 
 [node name="Flower" parent="." instance=ExtResource("5_4wu4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34665, -4.70509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.51574, -5.74984)
 
 [node name="Wall" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
@@ -329,16 +324,6 @@ metadata/original_pos = Vector3(0, 0, 0)
 [node name="Light" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426336, 0)
 
-[node name="TopOmniLight" type="OmniLight3D" parent="Light"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0189612, 1.8, 0.838159)
-light_color = Color(0.47, 0.4042, 0.3572, 1)
-light_energy = 3.026
-light_volumetric_fog_energy = 0.0
-light_specular = 0.0
-omni_range = 4.229
-omni_attenuation = -0.34
-omni_shadow_mode = 0
-
 [node name="FlowerSpotLight" type="SpotLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, 0.382683, 0.92388, 0, -0.92388, 0.382683, 0, 1.92668, -4.64139)
 light_color = Color(0.738769, 0.592755, 0.484677, 1)
@@ -352,13 +337,31 @@ spot_angle_attenuation = 1.8025
 [node name="BackgroundSpotLight" type="SpotLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, 0.887944, 0.459952, 0, -0.459952, 0.887944, 0, 3.03571, -1.42033)
 light_color = Color(0.859168, 0.746985, 0.63364, 1)
-light_energy = 0.736
+light_energy = 0.5
 light_specular = 0.0
 light_bake_mode = 0
 spot_range = 17.489
 spot_attenuation = -0.6
 spot_angle = 69.53
 spot_angle_attenuation = 0.615574
+
+[node name="TopOmniLight" type="OmniLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0189612, 1.8, 0.838159)
+light_color = Color(0.47, 0.4042, 0.3572, 1)
+light_energy = 1.5
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+omni_range = 4.229
+omni_attenuation = -0.34
+omni_shadow_mode = 0
+
+[node name="HoldingCardSpotLight" type="SpotLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 0.933724, 0.357993, 0, -0.357993, 0.933724, 0.0207653, -0.136389, 1.09637)
+light_color = Color(0.45928, 0.496252, 0.644684, 1)
+light_energy = 8.0
+spot_range = 2.324
+spot_attenuation = 2.46
+spot_angle = 31.7
 
 [node name="Decoration" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426336, 0)
@@ -385,22 +388,22 @@ texture = ExtResource("15_xhsrs")
 
 [node name="LampLight1" type="Sprite3D" parent="Decoration/TopLamp"]
 transform = Transform3D(0.971702, 0.23621, 0, -0.23621, 0.971702, 0, 0, 0, 1, 0, 0, -0.0999999)
-modulate = Color(1, 1, 1, 0.0392157)
+modulate = Color(1, 1, 1, 0.0784314)
 texture = ExtResource("18_swx6q")
 
 [node name="LampLight2" type="Sprite3D" parent="Decoration/TopLamp"]
 transform = Transform3D(0.995112, -0.0987466, 0, 0.0987466, 0.995112, 0, 0, 0, 1, 0, 0, -0.14)
-modulate = Color(1, 1, 1, 0.0392157)
+modulate = Color(1, 1, 1, 0.0784314)
 texture = ExtResource("19_8ckt6")
 
 [node name="LampLight3" type="Sprite3D" parent="Decoration/TopLamp"]
 transform = Transform3D(0.997134, 0.0756574, 0, -0.0756574, 0.997134, 0, 0, 0, 1, 0, 0, -0.18)
-modulate = Color(1, 1, 1, 0.0392157)
+modulate = Color(1, 1, 1, 0.0784314)
 texture = ExtResource("20_2o4wj")
 
 [node name="LampLight4" type="Sprite3D" parent="Decoration/TopLamp"]
 transform = Transform3D(0.98072, -0.195415, 0, 0.195415, 0.98072, 0, 0, 0, 1, 0, 0, -0.22)
-modulate = Color(1, 1, 1, 0.0392157)
+modulate = Color(1, 1, 1, 0.0784314)
 texture = ExtResource("21_jdf11")
 
 [node name="Lamp_animator" type="AnimationPlayer" parent="Decoration/TopLamp"]
@@ -409,12 +412,14 @@ libraries = {
 }
 
 [node name="Table" type="Node3D" parent="Decoration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.04475)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Decoration/Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.97221, -4.84498)
-mesh = SubResource("BoxMesh_n88va")
+transform = Transform3D(3.19606, 0, 0, 0, 3.19606, 0, 0, 0, 3.19606, 0, -3.24458, -4.84498)
+mesh = ExtResource("23_2i186")
 
 [node name="Test" type="Node" parent="."]
+script = ExtResource("24_7m7sj")
 
 [node name="Label" type="Label" parent="Test" node_paths=PackedStringArray("camera")]
 offset_left = 4.0
@@ -449,12 +454,6 @@ offset_left = 155.0
 offset_right = 221.0
 offset_bottom = 31.0
 text = "test"
-
-[node name="GameController" type="Node" parent="."]
-script = ExtResource("3_yc1me")
-
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("4_71wmt")
 
 [connection signal="pressed" from="Test/Button1" to="Test/Button1" method="_on_button_1_pressed"]
 [connection signal="pressed" from="Test/Button1/Button2" to="Test/Button1" method="_on_button_2_pressed"]

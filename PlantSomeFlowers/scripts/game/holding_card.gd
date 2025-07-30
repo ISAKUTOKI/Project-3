@@ -20,17 +20,6 @@ func _ready() -> void:
 
 	GlobalSignalBus.card_drew.connect(_on_draw_card)
 	GlobalSignalBus.card_used.connect(_on_use_card)
-	_test()
-
-
-func _test():
-	GameController.drow_card(CardStats.CardType.浇水)
-	GameController.drow_card(CardStats.CardType.浇水)
-	GameController.drow_card(CardStats.CardType.光照)
-	GameController.drow_card(CardStats.CardType.浇水)
-	GameController.drow_card(CardStats.CardType.修剪)
-	#print("当前手牌： ", holding_card_type)
-	#print("当前手牌： ", hloding_card_name)
 
 
 func _on_draw_card(drew_card: Card):
@@ -79,7 +68,7 @@ func _print_current_holding_card_info():
 
 func clear_holding_card():
 	if holding_card_object.size() == 0:
-		print("没有手牌了")
+		#print("没有手牌了")
 		return
 	#print(self.name,"  -test-")
 	for i in holding_card_object:

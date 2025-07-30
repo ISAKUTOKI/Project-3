@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="2_7fdmg"]
 [ext_resource type="ArrayMesh" uid="uid://dq370rwxqf4e1" path="res://models/flowerpot_model.tres" id="2_xxtvc"]
 [ext_resource type="ArrayMesh" uid="uid://dgx1nlvb58ql2" path="res://models/flower_up_0_model.tres" id="3_ihf3o"]
-[ext_resource type="ArrayMesh" uid="uid://cmqlwitf7ncs7" path="res://models/flower_down_3_model.tres" id="4_0pknw"]
+[ext_resource type="ArrayMesh" uid="uid://b8bmfjonxioe7" path="res://models/flower_down_4_model.tres" id="4_c68di"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wx5ek"]
 height = 0.94
@@ -26,7 +26,7 @@ skeleton = NodePath("../..")
 
 [node name="FlowerDown" type="MeshInstance3D" parent="View"]
 transform = Transform3D(-5.79521e-08, 0, 1.32579, 0, 1.30027, 0, -1.32579, 0, -5.79521e-08, 0, -0.0866844, 0)
-mesh = ExtResource("4_0pknw")
+mesh = ExtResource("4_c68di")
 skeleton = NodePath("../..")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
