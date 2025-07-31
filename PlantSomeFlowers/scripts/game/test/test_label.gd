@@ -29,6 +29,8 @@ func _process(_delta: float) -> void:
 	self.text += "位置：" + str(camera.current_target.position)
 	self.text += "        "  # 8
 	self.text += "旋转：" + str(camera.current_target.rotation)
+	self.text += "        "  # 8
+	self.text += "当前剩余天数："+str( GameManager.current_remaining_day)
 
 
 var has_warned: bool = false

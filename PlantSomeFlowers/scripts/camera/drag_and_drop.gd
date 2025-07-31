@@ -1,5 +1,4 @@
 extends Node
-
 @onready var camera: Camera3D = $".."
 var is_dragging: bool = false
 var current_card: Card = null
@@ -29,7 +28,9 @@ func _drag_card():
 		mouse_pos = get_viewport().get_mouse_position()
 		ray_dir = camera.project_ray_normal(mouse_pos)
 		var tween = create_tween()
-		tween.tween_property(current_card, "global_position", camera.global_position + ray_dir * drag_distance, 0.05)
+		tween.tween_property(
+			current_card, "global_position", camera.global_position + ray_dir * drag_distance, 0.05
+		)
 
 
 func _update_drag_position():
@@ -40,14 +41,12 @@ func _update_drag_position():
 	ray_dir = camera.project_ray_normal(mouse_pos)
 	current_card.global_position = camera.global_position + ray_dir * drag_distance
 	#print(current_card.global_position)
-	# 获取相机y轴旋转旋转（只取Y轴）
-
 	current_card.look_at(camera.position, Vector3(0, 1, 0), true)
 
 
 func _drop_card():
 	if is_dragging and (Input.is_action_just_released("drag") or Input.is_action_just_pressed("drop")):
-		if camera.current_target is Flower:  # 如果目标为花
+		if camera.current_target is Flower or camera.current_target is Option:  # 如果目标为花
 			current_card.card_is_used()
 		else:
 			current_card.card_is_dropped()

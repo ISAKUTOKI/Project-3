@@ -15,7 +15,7 @@ var original_pos: Vector3
 var original_rot: Vector3
 var original_sca: Vector3
 var drag_offest: Vector3
-var focus_offest: Vector3 = Vector3(0, 0.3, -0.1)  # 鼠标悬停时的偏移
+var focus_offest: Vector3 = Vector3(0, 0.2, -0.1)  # 鼠标悬停时的偏移
 
 
 func _ready() -> void:
@@ -58,7 +58,6 @@ func card_is_dragged():
 	hide_outline()
 	collider.disabled = true
 	is_dragging = true
-	pass
 
 
 func card_is_dropped():
@@ -70,7 +69,6 @@ func card_is_dropped():
 	await tween.finished
 	collider.disabled = false
 	is_dragging = false
-	pass
 
 
 func card_is_used():
@@ -85,12 +83,14 @@ func card_is_used():
 	used_effect.emitting = true
 	await get_tree().create_timer(used_effect.lifetime + 0.1).timeout
 
-	# 视觉与数据
+	# 数据
 	GameController.use_card(self)
+	# 视觉
 	var tween2 = create_tween()
 	tween2.tween_property(self, "scale", Vector3(0.001, 0.001, 0.001), 0.1)
 	await tween2.finished
 	view.visible = false
+	GameController.wait_frames(2)
 	self.queue_free()
 	#card_is_dropped()
 #endregion

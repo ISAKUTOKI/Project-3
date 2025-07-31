@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://djcoiwc3uaj7k"]
 
-[ext_resource type="Script" path="res://scripts/flower/flower.gd" id="1_un1qg"]
-[ext_resource type="Script" path="res://scripts/card/outline_highlighter.gd" id="2_7fdmg"]
+[ext_resource type="Script" uid="uid://d3v6qetbfeydd" path="res://scripts/flower/flower.gd" id="1_un1qg"]
+[ext_resource type="Script" uid="uid://dndoebey65nvp" path="res://scripts/card/outline_highlighter.gd" id="2_7fdmg"]
 [ext_resource type="ArrayMesh" uid="uid://dq370rwxqf4e1" path="res://models/flowerpot_model.tres" id="2_xxtvc"]
 [ext_resource type="ArrayMesh" uid="uid://dgx1nlvb58ql2" path="res://models/flower_up_0_model.tres" id="3_ihf3o"]
 [ext_resource type="ArrayMesh" uid="uid://b8bmfjonxioe7" path="res://models/flower_down_4_model.tres" id="4_c68di"]

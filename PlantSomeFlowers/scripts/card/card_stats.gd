@@ -7,6 +7,10 @@ enum CardType {
 	修剪,
 	捉虫,
 	收获,
+	
+	继续,
+	设置,
+	退出,
 }
 
 const CARD_NAME:={
@@ -16,6 +20,10 @@ const CARD_NAME:={
 	CardType.修剪: "修剪",
 	CardType.捉虫: "捉虫",
 	CardType.收获: "收获",
+	
+	CardType.继续: "继续<系统>",
+	CardType.设置: "设置<系统>",
+	CardType.退出: "收获<系统>",
 }
 
 const CARD_MATERIAL:={
@@ -25,4 +33,8 @@ const CARD_MATERIAL:={
 	CardType.修剪: preload("res://materials/cards/card_trim.tres"),
 	CardType.捉虫: preload("res://materials/cards/card_insecticide.tres"),
 	CardType.收获: preload("res://materials/cards/card_collect.tres"),
+	
+	CardType.继续: "继续<系统>", # 占位
+	CardType.设置: "设置<系统>", # 占位
+	CardType.退出: "收获<系统>", # 占位
 }

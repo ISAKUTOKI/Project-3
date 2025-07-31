@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dctuir8xbav1n"]
 
-[ext_resource type="Shader" path="res://shaders/model_based_outline.gdshader" id="1_kkpig"]
+[ext_resource type="Shader" uid="uid://celbw2uww3vfs" path="res://shaders/model_based_outline.gdshader" id="1_kkpig"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_kkpig")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/thickness = 1.05
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/thickness = 1.01

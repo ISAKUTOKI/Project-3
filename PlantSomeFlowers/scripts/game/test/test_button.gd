@@ -17,11 +17,11 @@ extends Button
 
 
 func _ready() -> void:
-	self.text = str("抽一张", CardStats.CARD_NAME[card_type])
+	self.text = str("可用")
 	if button_2:
-		button_2.text = "清空手牌"
+		button_2.text = "不可用"
 	if button_3:
-		button_3.text = "新的一天"
+		button_3.text = "下一天"
 
 	if not use_button_1:
 		button_1.disabled = true
@@ -34,14 +34,16 @@ func _ready() -> void:
 		button_3.visible = false
 
 
-func _on_button_1_pressed() -> void:
-	GameController.drow_card(card_type)
-
 @onready var holding_card: Node3D = $"../../HoldingCard"
 
+
+func _on_button_1_pressed() -> void:
+	GameController.set_camera_enable(true)
+
+
 func _on_button_2_pressed() -> void:
-	holding_card.clear_holding_card()
+	GameController.set_camera_enable(false)
 
 
 func _on_button_3_pressed() -> void:
-	GameController.new_day()
+	GameController.next_day()

@@ -49,8 +49,15 @@ func mouse_exited_card():
 
 
 func _on_card_used(_card: Card):
-	if _card.card_type == CardStats.CardType.收获:
-		_harvest()
+	match _card:
+		CardStats.CardType.收获:
+			_harvest()
+		CardStats.CardType.继续:
+			GameController.drow_card(CardStats.CardType.继续)
+		CardStats.CardType.设置:
+			GameController.drow_card(CardStats.CardType.设置)
+		CardStats.CardType.退出:
+			GameController.drow_card(CardStats.CardType.退出)
 
 
 func _on_flower_update_stats(_flower_type: FlowerStats.FlowerType):
@@ -60,6 +67,7 @@ func _on_flower_update_stats(_flower_type: FlowerStats.FlowerType):
 		flower_up.mesh = null
 	flower_down.mesh = FlowerStats.FLOWER_DOWN_MODEL[_flower_type]
 	#print(self.name,"执行无误")
+
 
 func _harvest():
 	pass

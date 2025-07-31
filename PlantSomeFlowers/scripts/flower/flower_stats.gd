@@ -47,4 +47,7 @@ const NEXT_STATS_NEEDS := {
 	FlowerType.幼苗: [浇水, 浇水, 浇水, 光照],
 	FlowerType.小枝: [浇水, 浇水, 光照, 光照, 光照, 捉虫],
 	FlowerType.成枝: [浇水, 光照, 修剪, 捉虫],
+	FlowerType.开花: [收获],
+	FlowerType.枯萎: [收获],
+	FlowerType.虫害: [收获],
 }
