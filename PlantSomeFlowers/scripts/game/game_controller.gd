@@ -73,7 +73,7 @@ func set_camera_enable(_can_process: bool):
 func _init() -> void:
 	pass
 
-func generate_card(card_type,position:Vector3):
+func generate_card(card_type,_position:Vector3):
 	if card_type is CardStats.CardType or card_type is FlowerStats.FlowerType:
 		pass
 	else:
