@@ -8,7 +8,7 @@ extends Camera3D
 @export var camera_fov: int = 95
 @export var camera_far: float = 20
 var rotation_speed = camera_sensitivity * 0.00005  # 相机旋转速度
-var can_rotate_camera: bool = false
+var can_rotate_camera: bool = true
 var original_pos: Vector3
 var original_rot_deg: Vector3
 

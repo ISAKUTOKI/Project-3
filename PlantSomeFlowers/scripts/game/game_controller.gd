@@ -43,7 +43,10 @@ func next_day():
 	if GameManager.current_remaining_day < 0:
 		print(self.name, "时间差不多咯~")
 		return
-	# 动画
+	# 控制摄像机 与 黑屏块
+	set_camera_enable(false)
+	full_black_screen.size = get_viewport().get_visible_rect().size + Vector2(500, 500)
+	# 动画D
 	var color_alpha_1 = Color(
 		full_black_screen.color.r, full_black_screen.color.g, full_black_screen.color.b, 1
 	)
@@ -51,17 +54,17 @@ func next_day():
 		full_black_screen.color.r, full_black_screen.color.g, full_black_screen.color.b, 0
 	)
 	var tween: Tween = create_tween()
-	set_camera_enable(false)
 	tween.tween_property(full_black_screen, "color", color_alpha_1, 0.7)
 	# 清除当前手牌并检查当前阶段
 	tween.tween_callback(func(): holding_card.clear_holding_card())
 	tween.tween_callback(func(): _check_current_stats_used_card())
-	# 黑屏
+	# 等待一段时间的黑屏
 	tween.tween_interval(0.7)
 	# 动画
 	tween.tween_property(main_camera, "rotation_degrees", Vector3(0, 0, 0), 0.01)
 	tween.tween_property(full_black_screen, "color", color_alpha_0, 0.7)
 	await tween.finished
+	# 摄像机复位
 	set_camera_enable(true)
 
 
@@ -70,15 +73,15 @@ func set_camera_enable(_can_process: bool):
 	main_camera.raycast.enabled = _can_process
 	main_camera.drag_and_drop.set_process_input(_can_process)
 
-func _init() -> void:
-	pass
 
-func generate_card(card_type,_position:Vector3):
+func generate_card(card_type, _position: Vector3):
 	if card_type is CardStats.CardType or card_type is FlowerStats.FlowerType:
 		pass
 	else:
 		pass
 	pass
+
+
 #region 和花朵有关的逻辑
 func _check_current_stats_used_card():
 	var _flower_type = GameManager.current_flower_stats

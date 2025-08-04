@@ -17,3 +17,4 @@ script = ExtResource("2_3yjb3")
 
 [node name="DragAndDrop" type="Node" parent="."]
 script = ExtResource("3_sec2l")
+drag_distance = 1.0

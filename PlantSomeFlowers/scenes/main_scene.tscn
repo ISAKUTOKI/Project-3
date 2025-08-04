@@ -401,6 +401,7 @@ offset_right = 86.0
 offset_bottom = 29.0
 text = "test"
 script = ExtResource("17_pmdib")
+use_this_test = false
 camera = NodePath("../../MainCamera")
 
 [node name="Button1" type="Button" parent="Test"]
@@ -413,6 +414,9 @@ text = "test"
 script = ExtResource("18_u5rgq")
 shake_strength = 2
 card_type = 1
+use_button_1 = false
+use_button_2 = false
+use_button_3 = false
 
 [node name="Button2" type="Button" parent="Test/Button1"]
 layout_mode = 0

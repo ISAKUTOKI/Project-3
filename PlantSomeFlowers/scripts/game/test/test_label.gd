@@ -5,10 +5,12 @@ extends Label
 var card_pos: Vector3
 var card_rot: Vector3
 
+func _ready() -> void:
+	if not use_this_test:
+		self.visible=false
 
 func _process(_delta: float) -> void:
 	if not use_this_test:
-		_waring()
 		return
 	if camera == null:
 		camera = get_node("MainCamera")
@@ -34,10 +36,3 @@ func _process(_delta: float) -> void:
 
 
 var has_warned: bool = false
-
-
-func _waring():
-	if has_warned:
-		return
-	push_warning("未启用此测试功能： " + self.name)
-	has_warned = true
