@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0.686387, 0.686387, 0.686387, 1)
 boot_splash/image="uid://b5rgm1gawo7cc"
 config/icon="uid://b5rgm1gawo7cc"
+config/tags=PackedStringArray("made_by_isaku")
 
 [autoload]
 
