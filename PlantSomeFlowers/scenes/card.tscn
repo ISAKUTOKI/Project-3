@@ -3,10 +3,17 @@
 [ext_resource type="Script" uid="uid://n54dtpbykuib" path="res://scripts/card/card.gd" id="1_csq2x"]
 [ext_resource type="ArrayMesh" uid="uid://cxo2lmkvs15so" path="res://models/card_model.tres" id="2_e1t0a"]
 [ext_resource type="Script" uid="uid://dndoebey65nvp" path="res://scripts/card/outline_highlighter.gd" id="4_m77ar"]
-[ext_resource type="Material" uid="uid://l5ukh1bxw7bd" path="res://sources/card_used_particles.tres" id="5_wvuv8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d1w4"]
 size = Vector3(0.5, 1.01279, 0.01)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ktuci"]
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 40.0
 
 [sub_resource type="Shader" id="Shader_l3ogi"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -51,7 +58,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dknt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg30u"]
 render_priority = 0
 shader = SubResource("Shader_l3ogi")
 shader_parameter/albedo = Color(0.939255, 0.887924, 0.770914, 1)
@@ -62,10 +69,10 @@ shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 
-[sub_resource type="SphereMesh" id="SphereMesh_w7cy4"]
-material = SubResource("ShaderMaterial_1dknt")
-radius = 0.03
-height = 0.06
+[sub_resource type="SphereMesh" id="SphereMesh_ktuci"]
+material = SubResource("ShaderMaterial_kg30u")
+radius = 0.02
+height = 0.04
 radial_segments = 8
 rings = 4
 
@@ -81,6 +88,7 @@ mesh = ExtResource("2_e1t0a")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.206799, 0)
+visible = false
 shape = SubResource("BoxShape3D_8d1w4")
 
 [node name="OutlineHighlighter" type="Node" parent="."]
@@ -89,11 +97,11 @@ color = Color(0.858679, 0.749935, 0.655972, 1)
 thickness = 1.05
 
 [node name="UsedEffect" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.446822, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256797, 0)
 emitting = false
-amount = 20
+amount = 30
 lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
-process_material = ExtResource("5_wvuv8")
-draw_pass_1 = SubResource("SphereMesh_w7cy4")
+process_material = SubResource("ParticleProcessMaterial_ktuci")
+draw_pass_1 = SubResource("SphereMesh_ktuci")

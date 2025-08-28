@@ -34,7 +34,7 @@ const CARD_MATERIAL:={
 	CardType.捉虫: preload("res://materials/cards/card_insecticide.tres"),
 	CardType.收获: preload("res://materials/cards/card_collect.tres"),
 	
-	CardType.继续: "继续<系统>", # 占位
-	CardType.设置: "设置<系统>", # 占位
-	CardType.退出: "收获<系统>", # 占位
+	CardType.继续: preload("res://materials/cards/card_continue.tres"),
+	CardType.设置: preload("res://materials/cards/card_option.tres"),
+	CardType.退出: preload("res://materials/cards/card_exit.tres"),
 }

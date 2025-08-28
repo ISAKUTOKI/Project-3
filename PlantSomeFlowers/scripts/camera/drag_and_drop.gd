@@ -46,7 +46,7 @@ func _update_drag_position():
 
 func _drop_card():
 	if is_dragging and (Input.is_action_just_released("drag") or Input.is_action_just_pressed("drop")):
-		if camera.current_target is Flower or camera.current_target is Option:  # 如果目标为花
+		if camera.current_target is Flower:  # 如果目标为花
 			current_card.card_is_used()
 		else:
 			current_card.card_is_dropped()

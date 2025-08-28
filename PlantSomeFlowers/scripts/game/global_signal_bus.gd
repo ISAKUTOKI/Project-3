@@ -12,3 +12,7 @@ signal stop_shake
 
 @warning_ignore("unused_signal")
 signal flower_update_stats(flower_type: FlowerStats.FlowerType)
+@warning_ignore("unused_signal")
+signal show_require(show_time: float)
+@warning_ignore("unused_signal")
+signal hide_require
